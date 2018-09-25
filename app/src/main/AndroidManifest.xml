@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vue.creationCompte"></activity>
+        <activity android:name=".vue.creationCompte" />
+        <activity android:name=".vue.choix_connection"></activity>
     </application>
 
 </manifest>

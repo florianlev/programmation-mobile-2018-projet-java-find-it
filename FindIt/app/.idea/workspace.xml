@@ -46,17 +46,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UtilisateurDAO.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UtilisateurDAO.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/cgmatane/informatique/findit/vue/accesseur/UtilisateurDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-              <folding />
+            <state relative-caret-position="555">
+              <caret line="27" column="12" lean-forward="false" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Utilisateur.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Utilisateur.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/cgmatane/informatique/findit/vue/modele/Utilisateur.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="506">
@@ -86,8 +88,8 @@
       <file leaf-file-name="UtilisateurURL.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/cgmatane/informatique/findit/vue/accesseur/UtilisateurURL.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            <state relative-caret-position="66">
+              <caret line="3" column="54" lean-forward="false" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -2359,8 +2361,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/ca/qc/cgmatane/informatique/findit/vue/accesseur/UtilisateurURL.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ca/qc/cgmatane/informatique/findit/vue/accesseur/UtilisateurDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/ca/qc/cgmatane/informatique/findit/vue/modele/Utilisateur.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ca/qc/cgmatane/informatique/findit/vue/accesseur/UtilisateurDAO.java" />
       </list>
     </option>
   </component>
@@ -2685,22 +2687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/cgmatane/informatique/findit/vue/accesseur/UtilisateurURL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/cgmatane/informatique/findit/vue/accesseur/UtilisateurDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/cgmatane/informatique/findit/vue/modele/Utilisateur.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
@@ -2722,6 +2708,24 @@
             <element signature="e#795#796#0" expanded="true" />
             <element signature="e#833#834#0" expanded="true" />
             <element signature="e#863#864#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/cgmatane/informatique/findit/vue/accesseur/UtilisateurURL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="54" lean-forward="false" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ca/qc/cgmatane/informatique/findit/vue/accesseur/UtilisateurDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="27" column="12" lean-forward="false" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

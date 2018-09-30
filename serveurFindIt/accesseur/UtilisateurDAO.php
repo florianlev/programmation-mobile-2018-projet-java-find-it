@@ -16,7 +16,7 @@
 			echo "ajouterUtilisateur()";
 			print_r($utilisateur);
 			
-			$SQL_AJOUTER_UTILISATEUR = "INSERT into utilisateur(nom, mail, mdp) VALUES('$utilisateur->nom','$utilisateur->mail','$utilisateur->mdp')";
+			$SQL_AJOUTER_UTILISATEUR = "INSERT into utilisateur(pseudo, mail, mdp) VALUES('$utilisateur->pseudo','$utilisateur->mail','$utilisateur->mdp')";
 			
 			echo $SQL_AJOUTER_UTILISATEUR;
 			global $basededonnees;

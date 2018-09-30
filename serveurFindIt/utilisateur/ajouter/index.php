@@ -5,7 +5,7 @@
 
     $utilisateurTableau = $_POST;
     $utilisateur = new stdClass();
-	$utilisateur->nom = $utilisateurTableau ['nom'];
+	$utilisateur->nom = $utilisateurTableau ['pseudo'];
 	$utilisateur->mail = $utilisateurTableau ['mail'];
     $utilisateur->mdp = $utilisateurTableau ['mdp'];
         

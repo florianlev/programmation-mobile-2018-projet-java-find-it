@@ -1,9 +1,15 @@
 package ca.qc.cgmatane.informatique.findit.vue.accesseur;
 
+import android.renderscript.ScriptGroup;
+
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Scanner;
 
 import ca.qc.cgmatane.informatique.findit.vue.modele.Utilisateur;
 
@@ -25,7 +31,25 @@ public class UtilisateurDAO implements UtilisateurURL {
             HttpURLConnection connection = (HttpURLConnection) urlAjouterUtilisateur.openConnection();
             connection.setDoInput(true);
             connection.setRequestMethod("POST");
-            
+            OutputStream fluxEcriture = connection.getOutputStream();
+            OutputStreamWriter envoyeur = new OutputStreamWriter(fluxEcriture);
+
+            envoyeur.write("pseudo="+ utilisateur.getPseudo() + "&mail=" + utilisateur.getMail() + "&mdp=" + utilisateur.getMdp());
+            envoyeur.close();
+
+            int codeReponse = connection.getResponseCode();
+            System.out.print("Code de reponse " + codeReponse);
+
+            InputStream fluxLecture = connection.getInputStream();
+            Scanner lecture = new Scanner(fluxLecture);
+
+            String derniereBalise = "</action>";
+            lecture.useDelimiter(derniereBalise);
+            xml = lecture.next() + derniereBalise;
+            lecture.close();
+            System.out.println("XML : " + xml);
+
+            connection.disconnect();
         } catch (MalformedURLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

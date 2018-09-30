@@ -13,6 +13,8 @@ public class Accueil extends AppCompatActivity {
 
     static final public int ACTIVITE_COMMENCER = 1;
     static final public int ACTIVITE_SCORE = 2;
+    static final public int ACTIVITE_CARTE = 3;
+
 
     protected Intent intentionNaviguerCommencer;
     protected Intent intentionNaviguerScore;

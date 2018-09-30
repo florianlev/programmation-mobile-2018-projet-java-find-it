@@ -20,7 +20,7 @@ public class SeConnecter extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_se_connecter);
 
-        intentionNaviguerJouer = new Intent(this, Jouer.class);
+        intentionNaviguerJouer = new Intent(this, Jeu.class);
         Button actionNaviguerJouer = (Button) findViewById(R.id.action_se_connecter_pour_jouer);
         actionNaviguerJouer.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){
@@ -28,8 +28,5 @@ public class SeConnecter extends AppCompatActivity {
             }
         });
     }
-
-
-
 
 }

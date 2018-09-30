@@ -1,7 +1,5 @@
 package ca.qc.cgmatane.informatique.findit.vue.accesseur;
 
-import android.renderscript.ScriptGroup;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;

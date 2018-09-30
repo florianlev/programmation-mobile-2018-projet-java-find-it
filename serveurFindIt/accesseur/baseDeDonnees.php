@@ -2,8 +2,8 @@
 
 	$base = "findItDB";
 	$hote = "localhost";
-	$usager = "root";
-	$motdepasse = "";
+	$usager = "webmestre";
+	$motdepasse = "projetFindIt2018";
 	$dsn = "mysql:dbname=".$base.";host=" . $hote;
 	$basededonnees = new PDO($dsn, $usager, $motdepasse);
 

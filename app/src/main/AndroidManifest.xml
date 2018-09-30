@@ -17,10 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".vue.Commencer" />
-        <activity android:name=".vue.Score" />
         <activity android:name=".vue.SeConnecter" />
         <activity android:name=".vue.Jouer" />
-        <activity android:name=".vue.CreerCompte"></activity>
+        <activity android:name=".vue.CreerCompte" />
+        <activity android:name=".vue.Score"></activity>
     </application>
 
 </manifest>

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.vue.Commencer;
 import ca.qc.cgmatane.informatique.findit.vue.Score;
 

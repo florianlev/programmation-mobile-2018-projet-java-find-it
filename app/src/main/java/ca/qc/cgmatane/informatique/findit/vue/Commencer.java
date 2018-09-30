@@ -22,8 +22,23 @@ public class Commencer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_commencer);
 
-    }
+        intentionNaviguerSeConnecter = new Intent(Commencer.this, SeConnecter.class);
+        Button actionNaviguerSeConnecter = (Button) findViewById(R.id.action_naviguer_se_connecter);
+        actionNaviguerSeConnecter.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View arg0){
+                startActivityForResult(intentionNaviguerSeConnecter, ACTIVITE_SE_CONNECTER);
+            }
+        });
 
+        intentionNaviguerCreerCompte = new Intent(Commencer.this, CreerCompte.class);
+        Button actionNaviguerCreerCompte = (Button) findViewById(R.id.action_naviguer_creer_compte);
+        actionNaviguerCreerCompte.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View arg0){
+                startActivityForResult(intentionNaviguerCreerCompte, ACTIVITE_CREER_COMPTE);
+            }
+        });
+
+    }
 
 
     public void naviguerRetourAccueil(){

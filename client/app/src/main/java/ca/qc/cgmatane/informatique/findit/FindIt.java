@@ -9,7 +9,7 @@ import android.widget.Button;
 import ca.qc.cgmatane.informatique.findit.vue.Commencer;
 import ca.qc.cgmatane.informatique.findit.vue.Score;
 
-public class Accueil extends AppCompatActivity {
+public class FindIt extends AppCompatActivity {
 
     static final public int ACTIVITE_COMMENCER = 1;
     static final public int ACTIVITE_SCORE = 2;

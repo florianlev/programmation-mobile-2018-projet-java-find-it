@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import ca.qc.cgmatane.informatique.findit.Accueil;
+import ca.qc.cgmatane.informatique.findit.FindIt;
 import ca.qc.cgmatane.informatique.findit.R;
 
 public class Score extends AppCompatActivity {
@@ -20,7 +20,7 @@ public class Score extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_score);
 
-        intentionNaviguerAccueil = new Intent(this, Accueil.class);
+        intentionNaviguerAccueil = new Intent(this, FindIt.class);
         Button actionNaviguerAccueil = (Button) findViewById(R.id.action_naviguer_accueil);
         actionNaviguerAccueil.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
+import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
 import ca.qc.cgmatane.informatique.findit.vue.Commencer;
 import ca.qc.cgmatane.informatique.findit.vue.Score;
 
@@ -19,11 +21,15 @@ public class FindIt extends AppCompatActivity {
     protected Intent intentionNaviguerCommencer;
     protected Intent intentionNaviguerScore;
 
+    protected UtilisateurDAO utilisateurDAO;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        utilisateurDAO = new UtilisateurDAO();
         setContentView(R.layout.vue_accueil);
 
         intentionNaviguerCommencer = new Intent(this, Commencer.class);
@@ -41,6 +47,10 @@ public class FindIt extends AppCompatActivity {
                 startActivityForResult(intentionNaviguerScore, ACTIVITE_SCORE);
             }
         });
+    }
+
+    public void ajouterUtilisateur(Utilisateur utilisateur){
+        utilisateurDAO.ajouterUtilisateur(utilisateur);
     }
 
 

@@ -58,7 +58,7 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
                     double latitudeJoueur = location.getLatitude();
                     double longitudeJoueur = location.getLongitude();
                     LatLng possitionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
-                    Toast.makeText(Jeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(Jeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
                     if (marqueurJoueur == null) {
                         MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("position joueur");
@@ -66,7 +66,7 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
                     } else {
                         marqueurJoueur.setPosition(possitionJoueur);
                     }
-                   // mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionJoueur));
+                    //mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionJoueur));
                     // mMap.animateCamera(CameraUpdateFactory.zoomTo(16f));
                 }
             }
@@ -112,23 +112,20 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
                 this, new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
-                        if(location !=null){
-                            double latitudeJoueur = location.getLatitude();
-                            double longitudeJoueur = location.getLongitude();
-                            LatLng possitionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
-                            //Toast.makeText(Jeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
-                            if (marqueurJoueur == null) {
-                                MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("position joueur");
-                                marqueurJoueur = mMap.addMarker(options);
-                            } else {
-                                marqueurJoueur.setPosition(possitionJoueur);
-                            }
-                            mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionJoueur));
-                            mMap.animateCamera(CameraUpdateFactory.zoomTo(16f));
+                        double latitudeJoueur = location.getLatitude();
+                        double longitudeJoueur = location.getLongitude();
+                        LatLng possitionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
+                        //Toast.makeText(Jeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
+                        if (marqueurJoueur == null) {
+                            MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("position joueur");
+                            marqueurJoueur = mMap.addMarker(options);
+                        } else {
+                            marqueurJoueur.setPosition(possitionJoueur);
                         }
-
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionJoueur));
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(16f));
 
                     }
                 });
@@ -150,3 +147,4 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
 
 
 }
+

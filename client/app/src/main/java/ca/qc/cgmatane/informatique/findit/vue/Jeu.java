@@ -2,12 +2,22 @@ package ca.qc.cgmatane.informatique.findit.vue;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -31,7 +41,7 @@ import com.google.android.gms.tasks.Task;
 
 import ca.qc.cgmatane.informatique.findit.R;
 
-public class Jeu extends FragmentActivity implements OnMapReadyCallback {
+public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -39,6 +49,11 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
     private Marker marqueurJoueur = null;
     LocationRequest mLocationRequest = new LocationRequest();
     private Marker marqueurDestination = null;
+
+    static final public int ACTIVITE_SCORE = 1;
+    protected Intent intentionNaviguerScore;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +89,24 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
 
             ;
         };
+    }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.drawer_view, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_score) {
+            intentionNaviguerScore = new Intent(this, Score.class);
+            startActivityForResult(intentionNaviguerScore, ACTIVITE_SCORE);
+            return  true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -127,14 +158,13 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
                             marqueurJoueur.setPosition(possitionJoueur);
                         }
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionJoueur));
-                        mMap.animateCamera(CameraUpdateFactory.zoomTo(14f));
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(7f));
 
                     }
                 });
     }
 
     protected void createLocationRequest() {
-
         mLocationRequest.setInterval(2500);
         mLocationRequest.setFastestInterval(1250);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -143,9 +173,11 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     private void startLocationUpdates() {
-
         mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
     }
+
+
+
     public void recupererPossitionDestination() {
 
         double latitudeDestination =37.422509;
@@ -161,9 +193,8 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
         }
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionDestination));
         //mMap.animateCamera(CameraUpdateFactory.zoomTo(14f));
-
-                    }
-                }
+    }
+}
 
 
 

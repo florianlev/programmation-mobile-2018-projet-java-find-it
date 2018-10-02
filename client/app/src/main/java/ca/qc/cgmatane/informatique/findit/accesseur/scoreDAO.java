@@ -95,6 +95,7 @@ public class ScoreDAO {
         ContentValues value = new ContentValues();
         value.put("valeur", Score.getValeur());
         db.insert("Score",null,value);
+        System.out.println("SUCCES AJOUT");
 
 
     }

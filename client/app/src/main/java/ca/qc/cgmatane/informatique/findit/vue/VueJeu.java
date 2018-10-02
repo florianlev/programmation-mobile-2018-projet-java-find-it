@@ -30,6 +30,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import ca.qc.cgmatane.informatique.findit.R;
+import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
+import ca.qc.cgmatane.informatique.findit.modele.Score;
 
 public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -40,6 +42,9 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     LocationRequest mLocationRequest = new LocationRequest();
     private Marker marqueurDestination = null;
 
+    protected double latitudeJoueur, longitudeJoueur;
+
+
     static final public int ACTIVITE_SCORE = 1;
     static final public int ACTIVITE_GALERIE = 2;
     static final public int ACTIVITE_ALARME = 3;
@@ -47,9 +52,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     protected Intent intentionNaviguerGalerie;
     protected Intent intentionNaviguerAlarme;
 
-
-    protected double latitudeJoueur, longitudeJoueur;
-
+    protected ScoreDAO scoreDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,8 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        scoreDAO = scoreDAO.getInstance();
 
         mLocationCallback = new LocationCallback() {
             @Override
@@ -84,6 +89,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                 }
 
                 if (cestGagne()){
+                    scoreDAO.ajouterScore(new Score(1, 1000));
                     stopLocationUpdates();
                     activeAlarme();
                 }

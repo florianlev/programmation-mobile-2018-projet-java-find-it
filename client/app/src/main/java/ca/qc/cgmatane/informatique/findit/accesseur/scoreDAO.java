@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import ca.qc.cgmatane.informatique.findit.modele.score;
-import ca.qc.cgmatane.informatique.findit.vue.Score;
 
 public class scoreDAO {
 

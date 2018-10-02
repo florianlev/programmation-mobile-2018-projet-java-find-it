@@ -15,7 +15,7 @@ import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.BaseDeDonnees;
 import ca.qc.cgmatane.informatique.findit.accesseur.scoreDAO;
 
-public class Score extends AppCompatActivity {
+public class VueScore extends AppCompatActivity {
     protected List<HashMap<String, String>> listeScorePourAdapteur;
     protected scoreDAO accesseurScore;
     protected ListView vuelistScore;

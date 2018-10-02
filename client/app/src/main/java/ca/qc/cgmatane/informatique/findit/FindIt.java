@@ -12,9 +12,8 @@ import android.widget.Button;
 
 import ca.qc.cgmatane.informatique.findit.accesseur.BaseDeDonnees;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
-import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
 import ca.qc.cgmatane.informatique.findit.vue.Commencer;
-import ca.qc.cgmatane.informatique.findit.vue.Score;
+import ca.qc.cgmatane.informatique.findit.vue.VueScore;
 
 public class FindIt extends AppCompatActivity {
 
@@ -44,7 +43,7 @@ public class FindIt extends AppCompatActivity {
             }
         });
 
-        intentionNaviguerScore = new Intent(this, Score.class);
+        intentionNaviguerScore = new Intent(this, VueScore.class);
         Button actionNaviguerScore = (Button) findViewById(R.id.action_naviguer_score);
         actionNaviguerScore.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){

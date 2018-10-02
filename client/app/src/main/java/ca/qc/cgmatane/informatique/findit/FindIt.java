@@ -26,7 +26,6 @@ public class FindIt extends AppCompatActivity {
     protected UtilisateurDAO utilisateurDAO;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -58,20 +57,6 @@ public class FindIt extends AppCompatActivity {
 
             ActivityCompat.requestPermissions(this, new String[]{
                     Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-        }
-    }
-
-
-
-    protected void onActivityResult(int activite, int resultat, Intent donnes){
-        switch (activite){
-            case ACTIVITE_COMMENCER:
-                //afficherTousLesLivres();
-                break;
-
-            case ACTIVITE_SCORE:
-                //afficherTousLesLivres();
-                break;
         }
     }
 }

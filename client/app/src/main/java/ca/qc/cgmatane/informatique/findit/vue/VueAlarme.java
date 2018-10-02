@@ -22,7 +22,7 @@ import ca.qc.cgmatane.informatique.findit.R;
 public class VueAlarme extends AppCompatActivity {
 
     private MediaPlayer mMediaPlayer;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

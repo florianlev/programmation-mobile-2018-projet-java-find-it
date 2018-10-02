@@ -48,9 +48,8 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".vue.Galerie"></activity>
-
-
+        <activity android:name=".vue.Galerie" />
+        <activity android:name=".vue.VueAlarme"></activity>
     </application>
 
 </manifest>

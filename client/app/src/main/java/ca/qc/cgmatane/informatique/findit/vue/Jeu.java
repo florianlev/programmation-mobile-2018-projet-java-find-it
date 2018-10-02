@@ -52,8 +52,11 @@ public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
 
     static final public int ACTIVITE_SCORE = 1;
     static final public int ACTIVITE_GALERIE = 2;
+    static final public int ACTIVITE_ALARME = 3;
     protected Intent intentionNaviguerScore;
     protected Intent intentionNaviguerGalerie;
+    protected Intent intentionNaviguerAlarme;
+
 
     protected double latitudeJoueur, longitudeJoueur;
 
@@ -86,17 +89,23 @@ public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
                     } else {
                         marqueurJoueur.setPosition(possitionJoueur);
                     }
-                    //mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionJoueur));
-                    // mMap.animateCamera(CameraUpdateFactory.zoomTo(16f));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionJoueur));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(13f));
                 }
 
                 if (cestGagne()){
                     stopLocationUpdates();
+                    activeAlarme();
                 }
             }
 
             ;
         };
+    }
+
+    public void activeAlarme(){
+        intentionNaviguerAlarme = new Intent(this, VueAlarme.class);
+        startActivityForResult(intentionNaviguerAlarme, ACTIVITE_ALARME);
     }
 
 
@@ -172,7 +181,7 @@ public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
                             marqueurJoueur.setPosition(possitionJoueur);
                         }
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionJoueur));
-                        mMap.animateCamera(CameraUpdateFactory.zoomTo(7f));
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(13f));
 
                     }
                 });

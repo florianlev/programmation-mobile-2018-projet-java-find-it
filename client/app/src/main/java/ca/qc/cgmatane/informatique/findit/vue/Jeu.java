@@ -22,6 +22,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -37,7 +38,7 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
     private LocationCallback mLocationCallback;
     private Marker marqueurJoueur = null;
     LocationRequest mLocationRequest = new LocationRequest();
-
+    private Marker marqueurDestination = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +59,10 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
                     double latitudeJoueur = location.getLatitude();
                     double longitudeJoueur = location.getLongitude();
                     LatLng possitionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
-                    //Toast.makeText(Jeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
+                    Toast.makeText(Jeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
                     if (marqueurJoueur == null) {
-                        MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("position joueur");
+                        MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                         marqueurJoueur = mMap.addMarker(options);
                     } else {
                         marqueurJoueur.setPosition(possitionJoueur);
@@ -91,6 +92,7 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         recupererPossitionJoueur();
+        recupererPossitionDestination();
         createLocationRequest();
         startLocationUpdates();
         /*// Add a marker in Sydney and move the camera
@@ -116,16 +118,16 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
                         double latitudeJoueur = location.getLatitude();
                         double longitudeJoueur = location.getLongitude();
                         LatLng possitionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
-                        //Toast.makeText(Jeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
+                        Toast.makeText(Jeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
                         if (marqueurJoueur == null) {
-                            MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("position joueur");
+                            MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                             marqueurJoueur = mMap.addMarker(options);
                         } else {
                             marqueurJoueur.setPosition(possitionJoueur);
                         }
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionJoueur));
-                        mMap.animateCamera(CameraUpdateFactory.zoomTo(16f));
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(14f));
 
                     }
                 });
@@ -133,8 +135,8 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
 
     protected void createLocationRequest() {
 
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setInterval(2500);
+        mLocationRequest.setFastestInterval(1250);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
     }
@@ -144,7 +146,25 @@ public class Jeu extends FragmentActivity implements OnMapReadyCallback {
 
         mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
     }
+    public void recupererPossitionDestination() {
+
+        double latitudeDestination =37.422509;
+        double longitudeDestination =-122.082111;
+        LatLng possitionDestination = new LatLng(latitudeDestination, longitudeDestination);
+        //Toast.makeText(Jeu.this, "latitude" + latitudeDestination + " longitude" + longitudeDestination, Toast.LENGTH_LONG).show();
+
+        if (marqueurDestination == null) {
+            MarkerOptions options = new MarkerOptions().position(possitionDestination).title("Destination");
+            marqueurDestination = mMap.addMarker(options);
+            } else {
+            marqueurDestination.setPosition(possitionDestination);
+        }
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionDestination));
+        //mMap.animateCamera(CameraUpdateFactory.zoomTo(14f));
+
+                    }
+                }
 
 
-}
+
 

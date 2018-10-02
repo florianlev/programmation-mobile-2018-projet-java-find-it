@@ -20,7 +20,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".vue.Jeu" />
+        tools:context=".vue.VueJeu" />
     </FrameLayout>
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
 

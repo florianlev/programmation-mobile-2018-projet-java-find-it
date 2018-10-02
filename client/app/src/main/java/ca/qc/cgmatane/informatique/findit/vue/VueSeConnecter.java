@@ -29,7 +29,7 @@ public class VueSeConnecter extends AppCompatActivity {
 
         champPseudo = (EditText) findViewById(R.id.vue_se_connecter_champ_pseudo);
         champMdp = (EditText) findViewById(R.id.vue_se_connecter_champ_mot_de_passe);
-        intentionNaviguerJouer = new Intent(this, Jeu.class);
+        intentionNaviguerJouer = new Intent(this, VueJeu.class);
         Button actionNaviguerJouer = (Button) findViewById(R.id.action_se_connecter_pour_jouer);
         actionNaviguerJouer.setOnClickListener(
                 new View.OnClickListener() {

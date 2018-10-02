@@ -31,7 +31,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import ca.qc.cgmatane.informatique.findit.R;
 
-public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
+public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -71,7 +71,7 @@ public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
                     latitudeJoueur = location.getLatitude();
                     longitudeJoueur = location.getLongitude();
                     LatLng possitionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
-                    Toast.makeText(Jeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
+                    Toast.makeText(VueJeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
                     if (marqueurJoueur == null) {
                         MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
@@ -162,7 +162,7 @@ public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
                         double latitudeJoueur = location.getLatitude();
                         double longitudeJoueur = location.getLongitude();
                         LatLng possitionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
-                        Toast.makeText(Jeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
+                        Toast.makeText(VueJeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
                         if (marqueurJoueur == null) {
                             MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
@@ -198,7 +198,7 @@ public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
         double latitudeDestination = 48.840218;
         double longitudeDestination = -67.498787;
         LatLng possitionDestination = new LatLng(latitudeDestination, longitudeDestination);
-        //Toast.makeText(Jeu.this, "latitude" + latitudeDestination + " longitude" + longitudeDestination, Toast.LENGTH_LONG).show();
+        //Toast.makeText(VueJeu.this, "latitude" + latitudeDestination + " longitude" + longitudeDestination, Toast.LENGTH_LONG).show();
 
         if (marqueurDestination == null) {
             MarkerOptions options = new MarkerOptions().position(possitionDestination).title("Destination");

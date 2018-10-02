@@ -41,7 +41,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".vue.Jeu"
+            android:name=".vue.VueJeu"
             android:label="@string/title_activity_test_carte" />
 
         <uses-library

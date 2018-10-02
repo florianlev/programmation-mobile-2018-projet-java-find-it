@@ -14,14 +14,36 @@ import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
 public class UtilisateurDAO implements UtilisateurURL {
 
     String xml = null;
-    Utilisateur utilisateur;
+    private static UtilisateurDAO instance = null;
 
-    public UtilisateurDAO() {
+    private BaseDeDonnees accesseurBaseDeDonnees;
 
-        utilisateur = new Utilisateur("","","");
+
+
+
+    public static UtilisateurDAO getInstance() {
+
+        if(null == instance)
+        {
+            instance = new UtilisateurDAO();
+        }
+        return instance;
     }
 
-    public void ajouterUtilisateur(Utilisateur utilisateur){
+    public UtilisateurDAO() {
+        this.accesseurBaseDeDonnees = BaseDeDonnees.getInstance();
+    }
+    public void ajouterUtilisateur(Utilisateur utilisateur)
+    {
+        //listeEvenements.add(evenement);
+        System.out.println("ajouterUtilisateur");
+        String AJOUTER_UTILISATEUR;
+        AJOUTER_UTILISATEUR = "INSERT INTO utilisateur (pseudo,mail,mdp) VALUES ('"+ utilisateur.getPseudo() +"','"+ utilisateur.getMdp()+"',' "+utilisateur.getMail()+"');";
+        accesseurBaseDeDonnees.getWritableDatabase().execSQL(AJOUTER_UTILISATEUR);
+
+    }
+
+    /*public void ajouterUtilisateur(Utilisateur utilisateur){
         String xml;
 
         try {
@@ -55,5 +77,5 @@ public class UtilisateurDAO implements UtilisateurURL {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
+    }*/
 }

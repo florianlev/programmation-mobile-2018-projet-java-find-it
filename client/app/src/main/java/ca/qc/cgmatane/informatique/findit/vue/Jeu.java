@@ -55,6 +55,8 @@ public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
     protected Intent intentionNaviguerScore;
     protected Intent intentionNaviguerGalerie;
 
+    protected double latitudeJoueur, longitudeJoueur;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +75,8 @@ public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
                     return;
                 }
                 for (Location location : locationResult.getLocations()) {
-                    double latitudeJoueur = location.getLatitude();
-                    double longitudeJoueur = location.getLongitude();
+                    latitudeJoueur = location.getLatitude();
+                    longitudeJoueur = location.getLongitude();
                     LatLng possitionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
                     Toast.makeText(Jeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
@@ -86,6 +88,10 @@ public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
                     }
                     //mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionJoueur));
                     // mMap.animateCamera(CameraUpdateFactory.zoomTo(16f));
+                }
+
+                if (cestGagne()){
+                    stopLocationUpdates();
                 }
             }
 
@@ -184,12 +190,14 @@ public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
         mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
     }
 
-
-
+    private void stopLocationUpdates() {
+        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+    }
+    
     public void recupererPossitionDestination() {
 
-        double latitudeDestination =37.422509;
-        double longitudeDestination =-122.082111;
+        double latitudeDestination = 48.840218;
+        double longitudeDestination = -67.498787;
         LatLng possitionDestination = new LatLng(latitudeDestination, longitudeDestination);
         //Toast.makeText(Jeu.this, "latitude" + latitudeDestination + " longitude" + longitudeDestination, Toast.LENGTH_LONG).show();
 
@@ -202,8 +210,33 @@ public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionDestination));
         //mMap.animateCamera(CameraUpdateFactory.zoomTo(14f));
     }
+
+    public double degreesToRadians(double degrees) {
+        return degrees * Math.PI / 180;
+    }
+
+    public double distanceInKmBetweenEarthCoordinates(double lat1, double lon1, double lat2, double lon2) {
+        int earthRadiusKm = 6371;
+
+        double dLat = degreesToRadians(lat2-lat1);
+        double dLon = degreesToRadians(lon2-lon1);
+
+        lat1 = degreesToRadians(lat1);
+        lat2 = degreesToRadians(lat2);
+
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return earthRadiusKm * c;
+    }
+
+    public boolean cestGagne(){
+        if (distanceInKmBetweenEarthCoordinates(48.840218, -67.498787, latitudeJoueur, longitudeJoueur) <= 1){
+            System.out.println("Gagné");
+            return true;
+        }else{
+            System.out.println("Marche encore");
+            return false;
+        }
+    }
 }
-
-
-
-

@@ -39,7 +39,7 @@ public class UtilisateurDAO implements UtilisateurURL {
         System.out.println("ajouterUtilisateur");
         String AJOUTER_UTILISATEUR;
         AJOUTER_UTILISATEUR = "INSERT INTO utilisateur (pseudo,mail,mdp) VALUES ('"+ utilisateur.getPseudo() +"','"+ utilisateur.getMdp()+"',' "+utilisateur.getMail()+"');";
-        accesseurBaseDeDonnees.getWritableDatabase().execSQL(AJOUTER_UTILISATEUR);
+        //accesseurBaseDeDonnees.getWritableDatabase().execSQL(AJOUTER_UTILISATEUR);
 
     }
 

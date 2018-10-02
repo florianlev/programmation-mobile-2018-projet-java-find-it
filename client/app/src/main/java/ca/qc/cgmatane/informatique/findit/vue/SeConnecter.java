@@ -15,7 +15,7 @@ public class SeConnecter extends AppCompatActivity {
 
     protected Intent intentionNaviguerJouer;
     protected EditText champPseudo;
-    protected EditText champMdr;
+    protected EditText champMdp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +23,21 @@ public class SeConnecter extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_se_connecter);
 
+        champPseudo = (EditText) findViewById(R.id.vue_se_connecter_champ_pseudo);
+        champMdp = (EditText) findViewById(R.id.vue_se_connecter_champ_mot_de_passe);
         intentionNaviguerJouer = new Intent(this, Jeu.class);
         Button actionNaviguerJouer = (Button) findViewById(R.id.action_se_connecter_pour_jouer);
-        actionNaviguerJouer.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View arg0){
-                startActivityForResult(intentionNaviguerJouer, ACTIVITE_JOUER);
-            }
-        });
+        actionNaviguerJouer.setOnClickListener(
+                new View.OnClickListener() {
+                    public void onClick(View arg0) {
+                        verifierConnection();
+                        startActivityForResult(intentionNaviguerJouer, ACTIVITE_JOUER);
+                    }
+                });
     }
 
+    private void verifierConnection() {
+
+
+    }
 }

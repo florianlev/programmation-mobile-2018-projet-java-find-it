@@ -33,7 +33,7 @@ public class CreerCompte extends AppCompatActivity {
 
         champPseudo = (EditText)findViewById(R.id.vue_creer_compte_champ_nom);
         champMail = (EditText)findViewById(R.id.vue_creer_compte_champ_mail);
-        champMdp = (EditText)findViewById(R.id.vue_se_connecter_champ_mot_de_passe);
+        champMdp = (EditText)findViewById(R.id.vue_creer_compte_champ_mot_de_passe);
         champMdpConfirme = (EditText)findViewById(R.id.vue_creer_compte_champ_verification_mot_de_passe);
 
         intentionNaviguerJouer = new Intent(this, Jeu.class);

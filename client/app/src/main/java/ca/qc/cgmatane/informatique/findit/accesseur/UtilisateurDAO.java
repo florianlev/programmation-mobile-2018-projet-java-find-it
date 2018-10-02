@@ -1,5 +1,7 @@
 package ca.qc.cgmatane.informatique.findit.accesseur;
 
+import android.database.Cursor;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -32,6 +34,18 @@ public class UtilisateurDAO implements UtilisateurURL {
 
     public UtilisateurDAO() {
         this.accesseurBaseDeDonnees = BaseDeDonnees.getInstance();
+    }
+
+    public String afficherUtilisateur(String pseudo){
+        String LISTER_EVENEMENTS = "SELECT mdp FROM utilisateur WHERE pseudo ='"+pseudo+"';";
+        Cursor curseur = accesseurBaseDeDonnees.getReadableDatabase().rawQuery(LISTER_EVENEMENTS,
+                null);
+        String mdp;
+        for(curseur.moveToFirst();!curseur.isAfterLast();curseur.moveToNext()) {
+            mdp = curseur.getString(curseur.getColumnIndex("mdp"));
+            return mdp;
+        }
+        return null;
     }
     public void ajouterUtilisateur(Utilisateur utilisateur)
     {

@@ -29,9 +29,9 @@ public class BaseDeDonnees  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE_UTILISATEUR = "create table utilisateur(utilisateur_id INTEGER PRIMARY KEY AUTOINCREMENT, utilisateur_speudo TEXT,utilisateur_mdp TEXT,utilisateur_mail TEXT )";
+        String CREATE_TABLE_UTILISATEUR = "create table utilisateur(utilisateur_id INTEGER PRIMARY KEY AUTOINCREMENT, pseudo TEXT, mdp TEXT,mail TEXT )";
         db.execSQL(CREATE_TABLE_UTILISATEUR);
-        String CREATE_TABLE_SCORE = "create table score(score_id INTEGER PRIMARY KEY, score_valeur INTEGER )";
+        String CREATE_TABLE_SCORE = "create table score(score_id INTEGER PRIMARY KEY, valeur INTEGER )";
         db.execSQL(CREATE_TABLE_SCORE);
     }
 
@@ -41,9 +41,9 @@ public class BaseDeDonnees  extends SQLiteOpenHelper {
         String DELETE = "delete from score where 1 = 1";
         db.execSQL(DELETE);
 
-        String INSERT_1 = "insert into score(score_valeur) VALUES(200)";
-        String INSERT_2 = "insert into score(score_valeur) VALUES(200)";
-        String INSERT_3 = "insert into score(score_valeur) VALUES(200)";
+        String INSERT_1 = "insert into score(valeur) VALUES(200)";
+        String INSERT_2 = "insert into score(valeur) VALUES(200)";
+        String INSERT_3 = "insert into score(valeur) VALUES(200)";
 
         db.execSQL(INSERT_1);
         db.execSQL(INSERT_2);
@@ -60,9 +60,9 @@ public class BaseDeDonnees  extends SQLiteOpenHelper {
         //db.execSQL(DETRUIRE_TABLE_SCORE);
         //String DETRUIRE_TABLE_SCORE = "drop table utilisateur";
         //db.execSQL(DETRUIRE_TABLE_SCORE);
-        String CREATE_TABLE_UTILISATEUR = "create table utilisateur(utilisateur_id INTEGER PRIMARY KEY AUTOINCREMENT, utilisateur_speudo TEXT,utilisateur_mdp TEXT,utilisateur_mail TEXT )";
+        String CREATE_TABLE_UTILISATEUR = "create table utilisateur(utilisateur_id INTEGER PRIMARY KEY AUTOINCREMENT, pseudo TEXT,mdp TEXT,mail TEXT )";
         db.execSQL(CREATE_TABLE_UTILISATEUR);
-        String CREATE_TABLE_SCORE = "create table score(score_id INTEGER PRIMARY KEY, score_valeur INTEGER )";
+        String CREATE_TABLE_SCORE = "create table score(score_id INTEGER PRIMARY KEY, valeur INTEGER )";
         db.execSQL(CREATE_TABLE_SCORE);
     }
 }

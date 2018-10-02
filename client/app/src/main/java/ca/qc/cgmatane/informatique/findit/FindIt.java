@@ -28,7 +28,6 @@ public class FindIt extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        utilisateurDAO = new UtilisateurDAO();
         setContentView(R.layout.vue_accueil);
 
         intentionNaviguerCommencer = new Intent(this, Commencer.class);

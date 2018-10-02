@@ -10,22 +10,22 @@ import java.util.List;
 
 import ca.qc.cgmatane.informatique.findit.modele.Score;
 
-public class scoreDAO {
+public class ScoreDAO {
 
 
-    private static scoreDAO instance =null;
+    private static ScoreDAO instance =null;
     private BaseDeDonnees accesseurBaseDeDonnees;
     protected List<Score> listeScores;
 
-    public static scoreDAO getInstance(){
+    public static ScoreDAO getInstance(){
         if (null == instance){
-            instance= new scoreDAO();
+            instance= new ScoreDAO();
         }
         return instance;
     }
 
 
-    public scoreDAO(){
+    public ScoreDAO(){
         this.accesseurBaseDeDonnees = BaseDeDonnees.getInstance();
         listeScores =new ArrayList<Score>();
 

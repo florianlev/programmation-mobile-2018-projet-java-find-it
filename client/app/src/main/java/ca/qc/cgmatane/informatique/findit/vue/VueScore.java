@@ -13,11 +13,11 @@ import java.util.List;
 
 import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.BaseDeDonnees;
-import ca.qc.cgmatane.informatique.findit.accesseur.scoreDAO;
+import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
 
 public class VueScore extends AppCompatActivity {
     protected List<HashMap<String, String>> listeScorePourAdapteur;
-    protected scoreDAO accesseurScore;
+    protected ScoreDAO accesseurScore;
     protected ListView vuelistScore;
 
     @Override
@@ -26,7 +26,7 @@ public class VueScore extends AppCompatActivity {
         setContentView(R.layout.vue_score);
 
         BaseDeDonnees.getInstance(getApplicationContext());
-        accesseurScore = scoreDAO.getInstance();
+        accesseurScore = ScoreDAO.getInstance();
         vuelistScore = (ListView) findViewById(R.id.vue_liste_score);
 
         Button actionNaviguerAccueil = (Button) findViewById(R.id.action_naviguer_accueil);

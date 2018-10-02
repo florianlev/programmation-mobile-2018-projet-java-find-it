@@ -51,7 +51,9 @@ public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
     private Marker marqueurDestination = null;
 
     static final public int ACTIVITE_SCORE = 1;
+    static final public int ACTIVITE_GALERIE = 2;
     protected Intent intentionNaviguerScore;
+    protected Intent intentionNaviguerGalerie;
 
 
     @Override
@@ -101,10 +103,16 @@ public class Jeu extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         if (id == R.id.nav_score) {
             intentionNaviguerScore = new Intent(this, Score.class);
             startActivityForResult(intentionNaviguerScore, ACTIVITE_SCORE);
-            return  true;
+            return true;
+        }
+        if (id == R.id.nav_galerie) {
+            intentionNaviguerGalerie = new Intent(this, Galerie.class);
+            startActivityForResult(intentionNaviguerGalerie, ACTIVITE_GALERIE);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

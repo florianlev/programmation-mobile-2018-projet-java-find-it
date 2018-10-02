@@ -1,6 +1,10 @@
 package ca.qc.cgmatane.informatique.findit;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,10 +20,8 @@ public class FindIt extends AppCompatActivity {
     static final public int ACTIVITE_COMMENCER = 1;
     static final public int ACTIVITE_SCORE = 2;
 
-
     protected Intent intentionNaviguerCommencer;
     protected Intent intentionNaviguerScore;
-
     protected UtilisateurDAO utilisateurDAO;
 
 
@@ -46,6 +48,13 @@ public class FindIt extends AppCompatActivity {
                 startActivityForResult(intentionNaviguerScore, ACTIVITE_SCORE);
             }
         });
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        }
     }
 
     public void ajouterUtilisateur(Utilisateur utilisateur){

@@ -26,7 +26,7 @@
         </activity>
         <activity android:name=".vue.VueCommencer" />
         <activity android:name=".vue.VueSeConnecter" />
-        <activity android:name=".vue.CreerCompte" />
+        <activity android:name=".vue.VueCreerCompte" />
         <activity android:name=".vue.VueScore" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -48,7 +48,7 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".vue.Galerie" />
+        <activity android:name=".vue.VueGalerie" />
         <activity android:name=".vue.VueAlarme"></activity>
     </application>
 

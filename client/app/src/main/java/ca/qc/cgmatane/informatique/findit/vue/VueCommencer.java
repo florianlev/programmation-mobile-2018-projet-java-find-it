@@ -29,7 +29,7 @@ public class VueCommencer extends AppCompatActivity {
             }
         });
 
-        intentionNaviguerCreerCompte = new Intent(VueCommencer.this, CreerCompte.class);
+        intentionNaviguerCreerCompte = new Intent(VueCommencer.this, VueCreerCompte.class);
         Button actionNaviguerCreerCompte = (Button) findViewById(R.id.action_naviguer_creer_compte);
         actionNaviguerCreerCompte.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){

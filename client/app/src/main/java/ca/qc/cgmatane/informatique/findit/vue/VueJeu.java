@@ -115,7 +115,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
             return true;
         }
         if (id == R.id.nav_galerie) {
-            intentionNaviguerGalerie = new Intent(this, Galerie.class);
+            intentionNaviguerGalerie = new Intent(this, VueGalerie.class);
             startActivityForResult(intentionNaviguerGalerie, ACTIVITE_GALERIE);
             return true;
         }

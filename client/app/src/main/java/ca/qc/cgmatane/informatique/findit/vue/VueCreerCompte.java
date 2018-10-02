@@ -11,7 +11,7 @@ import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
 import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
 
-public class CreerCompte extends AppCompatActivity {
+public class VueCreerCompte extends AppCompatActivity {
 
     static final public int ACTIVITE_JOUER = 1;
 

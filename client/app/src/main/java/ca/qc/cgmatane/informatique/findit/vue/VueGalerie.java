@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 
 import ca.qc.cgmatane.informatique.findit.R;
 
-public class Galerie extends AppCompatActivity {
+public class VueGalerie extends AppCompatActivity {
 
 
     @Override

@@ -1,6 +1,8 @@
 package ca.qc.cgmatane.informatique.findit.accesseur;
 
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,13 +49,28 @@ public class UtilisateurDAO implements UtilisateurURL {
         }
         return null;
     }
+
+    public int verifConnecction(String pseudo,String mdp){
+        String LISTER_EVENEMENTS = "SELECT count(utilisateur_id) as compteur FROM utilisateur WHERE pseudo ='"+pseudo+"' AND mdp ='"+mdp+"';";
+        Cursor curseur = accesseurBaseDeDonnees.getReadableDatabase().rawQuery(LISTER_EVENEMENTS,
+                null);
+        int compteur;
+        for(curseur.moveToFirst();!curseur.isAfterLast();curseur.moveToNext()) {
+            compteur = curseur.getInt(curseur.getColumnIndex("compteur"));
+            return compteur;
+        }
+        return 0;
+    }
     public void ajouterUtilisateur(Utilisateur utilisateur)
     {
         //listeEvenements.add(evenement);
-        System.out.println("ajouterUtilisateur");
-        String AJOUTER_UTILISATEUR;
-        AJOUTER_UTILISATEUR = "INSERT INTO utilisateur (pseudo,mail,mdp) VALUES ('"+ utilisateur.getPseudo() +"','"+ utilisateur.getMdp()+"',' "+utilisateur.getMail()+"');";
-        //accesseurBaseDeDonnees.getWritableDatabase().execSQL(AJOUTER_UTILISATEUR);
+        SQLiteDatabase db = accesseurBaseDeDonnees.getWritableDatabase();
+        ContentValues value = new ContentValues();
+        value.put("pseudo", utilisateur.getPseudo());
+        value.put("mdp", utilisateur.getMdp());
+        value.put("mail", utilisateur.getMail());
+        db.insert("utilisateur", null,value);
+
 
     }
 

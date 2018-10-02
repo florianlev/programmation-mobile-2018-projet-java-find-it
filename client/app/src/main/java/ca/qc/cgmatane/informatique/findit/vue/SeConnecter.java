@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import ca.qc.cgmatane.informatique.findit.R;
+import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
 
 public class SeConnecter extends AppCompatActivity {
 
@@ -16,6 +17,9 @@ public class SeConnecter extends AppCompatActivity {
     protected Intent intentionNaviguerJouer;
     protected EditText champPseudo;
     protected EditText champMdp;
+
+    protected UtilisateurDAO accesseurUtilisateur = UtilisateurDAO.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +35,21 @@ public class SeConnecter extends AppCompatActivity {
                 new View.OnClickListener() {
                     public void onClick(View arg0) {
                         verifierConnection();
-                        startActivityForResult(intentionNaviguerJouer, ACTIVITE_JOUER);
                     }
                 });
     }
 
     private void verifierConnection() {
+        String pseudo =champPseudo.getText().toString();
+        String mdp =champMdp.getText().toString();
+        int verif=accesseurUtilisateur.verifConnecction(pseudo,mdp);
+        if(verif>= 1){
+            startActivityForResult(intentionNaviguerJouer, ACTIVITE_JOUER);
 
+        }
+        else{
+            System.out.println("ERREUR");
 
+        }
     }
 }

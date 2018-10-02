@@ -49,7 +49,7 @@ public class BaseDeDonnees  extends SQLiteOpenHelper {
         db.execSQL(INSERT_2);
         db.execSQL(INSERT_3);
 
-        String INSERT_1UTILISATEUR = "insert into utilisateur( speudo ,mdp ,mail) VALUES('toto','test','toto@gmail.com')";
+        String INSERT_1UTILISATEUR = "insert into utilisateur( pseudo ,mdp ,mail) VALUES('toto','test','toto@gmail.com')";
         db.execSQL(INSERT_1UTILISATEUR);
     }
 

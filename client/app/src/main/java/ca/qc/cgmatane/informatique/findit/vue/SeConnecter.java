@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import ca.qc.cgmatane.informatique.findit.R;
 
@@ -13,6 +14,8 @@ public class SeConnecter extends AppCompatActivity {
     static final public int ACTIVITE_JOUER = 1;
 
     protected Intent intentionNaviguerJouer;
+    protected EditText champPseudo;
+    protected EditText champMdr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

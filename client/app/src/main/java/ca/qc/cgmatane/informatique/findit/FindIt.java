@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import ca.qc.cgmatane.informatique.findit.accesseur.BaseDeDonnees;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
 import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
 import ca.qc.cgmatane.informatique.findit.vue.Commencer;
@@ -25,12 +26,16 @@ public class FindIt extends AppCompatActivity {
     protected UtilisateurDAO utilisateurDAO;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.vue_accueil);
+
+        BaseDeDonnees.getInstance(getApplicationContext());
+        utilisateurDAO = utilisateurDAO.getInstance();
 
         intentionNaviguerCommencer = new Intent(this, Commencer.class);
         Button actionNaviguerCommencer = (Button) findViewById(R.id.action_naviguer_commencer);
@@ -54,10 +59,6 @@ public class FindIt extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{
                     Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
-    }
-
-    public void ajouterUtilisateur(Utilisateur utilisateur){
-        utilisateurDAO.ajouterUtilisateur(utilisateur);
     }
 
 

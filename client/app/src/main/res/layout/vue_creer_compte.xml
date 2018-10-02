@@ -23,7 +23,7 @@
         android:text="Nom" />
 
     <EditText
-        android:id="@+id/vue_se_connecter_champ_pseudo"
+        android:id="@+id/vue_creer_compte_champ_nom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -37,7 +37,7 @@
         android:text="Mail" />
 
     <EditText
-        android:id="@+id/vue_se_connecter_champ_mail"
+        android:id="@+id/vue_creer_compte_champ_mail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -51,7 +51,7 @@
         android:text="Mot de passe" />
 
     <EditText
-        android:id="@+id/vue_se_connecter_champ_mot_de_passe"
+        android:id="@+id/vue_creer_compte_champ_mot_de_passe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
@@ -66,7 +66,7 @@
         android:text="Vérification mot de passe" />
 
     <EditText
-        android:id="@+id/vue_se_connecter_champ_verification_mot_de_passe"
+        android:id="@+id/vue_creer_compte_champ_verification_mot_de_passe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
@@ -75,7 +75,7 @@
         android:text="" />
 
     <Button
-        android:id="@+id/action_se_connecter_pour_jouer"
+        android:id="@+id/action_sinscrire"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="JOUER !" />

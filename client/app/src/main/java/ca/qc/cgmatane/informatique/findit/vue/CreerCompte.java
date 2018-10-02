@@ -31,14 +31,14 @@ public class CreerCompte extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_creer_compte);
 
-        champPseudo = (EditText)findViewById(R.id.vue_se_connecter_champ_pseudo);
-        champMail = (EditText)findViewById(R.id.vue_se_connecter_champ_mail);
+        champPseudo = (EditText)findViewById(R.id.vue_creer_compte_champ_nom);
+        champMail = (EditText)findViewById(R.id.vue_creer_compte_champ_mail);
         champMdp = (EditText)findViewById(R.id.vue_se_connecter_champ_mot_de_passe);
-        champMdpConfirme = (EditText)findViewById(R.id.vue_se_connecter_champ_verification_mot_de_passe);
+        champMdpConfirme = (EditText)findViewById(R.id.vue_creer_compte_champ_verification_mot_de_passe);
 
         intentionNaviguerJouer = new Intent(this, Jeu.class);
         Button actionNaviguerJouer =
-                (Button) findViewById(R.id.action_se_connecter_pour_jouer);
+                (Button) findViewById(R.id.action_sinscrire);
 
         actionNaviguerJouer.setOnClickListener(
                 new View.OnClickListener(){

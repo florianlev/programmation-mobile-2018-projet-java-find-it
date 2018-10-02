@@ -10,7 +10,7 @@ import android.widget.EditText;
 import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
 
-public class SeConnecter extends AppCompatActivity {
+public class VueSeConnecter extends AppCompatActivity {
 
     static final public int ACTIVITE_JOUER = 1;
 

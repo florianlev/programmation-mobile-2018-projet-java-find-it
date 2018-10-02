@@ -24,8 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vue.Commencer" />
-        <activity android:name=".vue.SeConnecter" />
+        <activity android:name=".vue.VueCommencer" />
+        <activity android:name=".vue.VueSeConnecter" />
         <activity android:name=".vue.CreerCompte" />
         <activity android:name=".vue.VueScore" />
         <!--

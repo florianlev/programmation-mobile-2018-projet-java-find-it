@@ -33,13 +33,13 @@ public class VueAlarme extends AppCompatActivity {
         Button stopAlarm = (Button) findViewById(R.id.action_naviguer_ancienne_activite);
         stopAlarm.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View arg0, MotionEvent arg1) {
-                mMediaPlayer.stop();
+                //mMediaPlayer.stop();
                 naviguerAncienneActivite();
                 return false;
             }
         });
 
-        playSound(this, getAlarmUri());
+        //playSound(this, getAlarmUri());
     }
 
 

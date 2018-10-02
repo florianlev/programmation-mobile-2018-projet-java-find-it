@@ -36,7 +36,7 @@ public class CreerCompte extends AppCompatActivity {
         champMdp = (EditText)findViewById(R.id.vue_creer_compte_champ_mot_de_passe);
         champMdpConfirme = (EditText)findViewById(R.id.vue_creer_compte_champ_verification_mot_de_passe);
 
-        intentionNaviguerJouer = new Intent(this, Jeu.class);
+        intentionNaviguerJouer = new Intent(this, Commencer.class);
         Button actionNaviguerJouer =
                 (Button) findViewById(R.id.action_sinscrire);
 

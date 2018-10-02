@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import ca.qc.cgmatane.informatique.findit.modele.score;
+import ca.qc.cgmatane.informatique.findit.modele.Score;
 
 public class scoreDAO {
 
 
     private static scoreDAO instance =null;
     private BaseDeDonnees accesseurBaseDeDonnees;
-    protected List<score> listeScores;
+    protected List<Score> listeScores;
 
     public static scoreDAO getInstance(){
         if (null == instance){
@@ -27,16 +27,16 @@ public class scoreDAO {
 
     public scoreDAO(){
         this.accesseurBaseDeDonnees = BaseDeDonnees.getInstance();
-        listeScores =new ArrayList<score>();
+        listeScores =new ArrayList<Score>();
 
     }
 
-    public List<score> listerScore() {
+    public List<Score> listerScore() {
         String LISTER_SCORES = "SELECT * FROM score";
         Cursor curseur = accesseurBaseDeDonnees.getReadableDatabase().rawQuery(LISTER_SCORES,
                 null);
         this.listeScores.clear();
-        score score;
+        Score Score;
 
         int indexId_score = curseur.getColumnIndex("score_id");
         int indexValeur = curseur.getColumnIndex("valeur");
@@ -48,16 +48,16 @@ public class scoreDAO {
             int valeur = curseur.getInt(indexValeur);
 
 
-            score = new score(id_score,valeur);
-            this.listeScores.add(score);
+            Score = new Score(id_score,valeur);
+            this.listeScores.add(Score);
         }
 
         return listeScores;
     }
 
-    public score trouverScore(int id_score)
+    public Score trouverScore(int id_score)
     {
-        for(score scoreRecherche : this.listeScores)
+        for(Score scoreRecherche : this.listeScores)
         {
             if(scoreRecherche.getId() == id_score) return scoreRecherche;
         }
@@ -65,15 +65,15 @@ public class scoreDAO {
     }
 
 
-    public void modifierEvenement(score score)
+    public void modifierEvenement(Score Score)
     {
 
         SQLiteDatabase db = accesseurBaseDeDonnees.getWritableDatabase();
         ContentValues value = new ContentValues();
-        value.put("valeur",score.getValeur());
+        value.put("valeur", Score.getValeur());
 
 
-        db.update("score",value,"score_id = ? ",new String[] {String.valueOf(score.getId())});
+        db.update("Score",value,"score_id = ? ",new String[] {String.valueOf(Score.getId())});
 
     }
 
@@ -83,18 +83,18 @@ public class scoreDAO {
         listeScorePourAdapteur = new ArrayList<HashMap<String, String>>();
 
         listerScore();
-        for(score score:listeScores){
-            listeScorePourAdapteur.add(score.obtenirScorePourAdapteur());
+        for(Score Score :listeScores){
+            listeScorePourAdapteur.add(Score.obtenirScorePourAdapteur());
         }
         return listeScorePourAdapteur;
     }
 
-    public void ajouterScore(score score)
+    public void ajouterScore(Score Score)
     {
         SQLiteDatabase db = accesseurBaseDeDonnees.getWritableDatabase();
         ContentValues value = new ContentValues();
-        value.put("valeur",score.getValeur());
-        db.insert("score",null,value);
+        value.put("valeur", Score.getValeur());
+        db.insert("Score",null,value);
 
 
     }

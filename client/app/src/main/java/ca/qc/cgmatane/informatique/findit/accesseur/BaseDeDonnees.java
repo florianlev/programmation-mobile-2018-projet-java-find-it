@@ -56,7 +56,7 @@ public class BaseDeDonnees  extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
-        //String DETRUIRE_TABLE_SCORE = "drop table score";
+        //String DETRUIRE_TABLE_SCORE = "drop table Score";
         //db.execSQL(DETRUIRE_TABLE_SCORE);
         //String DETRUIRE_TABLE_SCORE = "drop table utilisateur";
         //db.execSQL(DETRUIRE_TABLE_SCORE);

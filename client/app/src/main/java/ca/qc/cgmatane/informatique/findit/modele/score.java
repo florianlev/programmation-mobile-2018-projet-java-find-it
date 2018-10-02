@@ -2,11 +2,11 @@ package ca.qc.cgmatane.informatique.findit.modele;
 
 import java.util.HashMap;
 
-public class score {
+public class Score {
     protected int id;
     protected int valeur;
 
-    public score(int id, int valeur) {
+    public Score(int id, int valeur) {
         this.id = id;
         this.valeur = valeur;
     }

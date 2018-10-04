@@ -62,18 +62,6 @@ public class UtilisateurDAO {
         }
         return 0;
     }
-    public void ajouterUtilisateur(Utilisateur utilisateur)
-    {
-        //listeEvenements.add(evenement);
-        SQLiteDatabase db = accesseurBaseDeDonnees.getWritableDatabase();
-        ContentValues value = new ContentValues();
-        value.put("pseudo", utilisateur.getPseudo());
-        value.put("mdp", utilisateur.getMdp());
-        value.put("mail", utilisateur.getMail());
-        db.insert("utilisateur", null,value);
-
-
-    }
 
     public void ajouterUtilisateurSQL(Utilisateur utilisateur){
 

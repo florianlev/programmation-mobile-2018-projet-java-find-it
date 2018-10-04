@@ -51,7 +51,7 @@ public class VueCreerCompte extends AppCompatActivity {
 
     private void enregistrerUtilisateur(){
         utilisateur = new Utilisateur(champPseudo.getText().toString(),champMail.getText().toString(), champMdp.getText().toString());
-        accesseurUtilisateur.ajouterUtilisateur(utilisateur);
+        accesseurUtilisateur.ajouterUtilisateurSQL(utilisateur);
 
     }
 }

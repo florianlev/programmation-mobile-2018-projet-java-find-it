@@ -36,8 +36,8 @@ public class FindIt extends AppCompatActivity {
         BaseDeDonnees.getInstance(getApplicationContext());
         utilisateurDAO = utilisateurDAO.getInstance();
 
-        Utilisateur utilisateur = new Utilisateur("test","testtoto", "test");
-        utilisateurDAO.ajouterUtilisateurSQL(utilisateur);
+        //Utilisateur utilisateur = new Utilisateur("test","testtoto", "test");
+        //utilisateurDAO.ajouterUtilisateurSQL(utilisateur);
 
         intentionNaviguerCommencer = new Intent(this, VueCommencer.class);
         Button actionNaviguerCommencer = (Button) findViewById(R.id.action_naviguer_commencer);

@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import ca.qc.cgmatane.informatique.findit.accesseur.BaseDeDonnees;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
+import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
 import ca.qc.cgmatane.informatique.findit.vue.VueCommencer;
 import ca.qc.cgmatane.informatique.findit.vue.VueScore;
 
@@ -34,6 +35,9 @@ public class FindIt extends AppCompatActivity {
 
         BaseDeDonnees.getInstance(getApplicationContext());
         utilisateurDAO = utilisateurDAO.getInstance();
+
+        Utilisateur utilisateur = new Utilisateur("test","testtoto", "test");
+        utilisateurDAO.ajouterUtilisateurSQL(utilisateur);
 
         intentionNaviguerCommencer = new Intent(this, VueCommencer.class);
         Button actionNaviguerCommencer = (Button) findViewById(R.id.action_naviguer_commencer);

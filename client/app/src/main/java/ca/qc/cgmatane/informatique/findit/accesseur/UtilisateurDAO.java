@@ -12,10 +12,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
 
-public class UtilisateurDAO implements UtilisateurURL {
+public class UtilisateurDAO {
 
     String xml = null;
     private static UtilisateurDAO instance = null;
@@ -74,39 +75,18 @@ public class UtilisateurDAO implements UtilisateurURL {
 
     }
 
-    /*public void ajouterUtilisateur(Utilisateur utilisateur){
-        String xml;
+    public void ajouterUtilisateurSQL(Utilisateur utilisateur){
 
-        try {
-            URL urlAjouterUtilisateur = new URL(URL_AJOUTER_UTILISATEUR);
-            HttpURLConnection connection = (HttpURLConnection) urlAjouterUtilisateur.openConnection();
-            connection.setDoInput(true);
-            connection.setRequestMethod("POST");
-            OutputStream fluxEcriture = connection.getOutputStream();
-            OutputStreamWriter envoyeur = new OutputStreamWriter(fluxEcriture);
+        try{
+            String url = "http://158.69.113.110/findItServeur/utilisateur/ajouter/index.php?pseudo="+utilisateur.getPseudo()+"&mail="+utilisateur.getMail()+"&mdp="+utilisateur.getMdp();
 
-            envoyeur.write("pseudo="+ utilisateur.getPseudo() + "&mail=" + utilisateur.getMail() + "&mdp=" + utilisateur.getMdp());
-            envoyeur.close();
-
-            int codeReponse = connection.getResponseCode();
-            System.out.print("Code de reponse " + codeReponse);
-
-            InputStream fluxLecture = connection.getInputStream();
-            Scanner lecture = new Scanner(fluxLecture);
-
-            String derniereBalise = "</action>";
-            lecture.useDelimiter(derniereBalise);
-            xml = lecture.next() + derniereBalise;
-            lecture.close();
-            System.out.println("XML : " + xml);
-
-            connection.disconnect();
-        } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            String resultat;
+            HttpGetRequete getRequete = new HttpGetRequete();
+            resultat = getRequete.execute(url).get();
+        }catch(InterruptedException e){
+            System.out.println("got interrupted!");
+        }catch(ExecutionException e){
+            System.out.println("got interrupted!");
         }
-    }*/
+    }
 }

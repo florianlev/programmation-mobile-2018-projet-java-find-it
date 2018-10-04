@@ -239,10 +239,26 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     public boolean cestGagne(){
         if (distanceInKmBetweenEarthCoordinates(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 1){
             System.out.println("Gagné");
+            setNewDestination();
             return true;
         }else{
             System.out.println("Marche encore");
             return false;
         }
+    }
+
+    public void setNewDestination(){
+        double latitudeDestinationMax = 48.850020;
+        double latitudeDestinationMin = 48.830022;
+
+        double longitudeDestinationMax = -67.535786;
+        double longitudeDestinationMin = -67.491784;
+
+        double longitudeNouvelleDestination = longitudeDestinationMin + (Math.random() * ((longitudeDestinationMax - longitudeDestinationMin)));
+        System.out.println("Nouvelle destination " + longitudeNouvelleDestination);
+
+        double latitudeNouvelleDestination = latitudeDestinationMin + (Math.random() * ((latitudeDestinationMax - latitudeDestinationMin)));
+        System.out.println("Nouvelle destination " + latitudeNouvelleDestination);
+
     }
 }

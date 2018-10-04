@@ -1,29 +1,34 @@
 package ca.qc.cgmatane.informatique.findit.accesseur;
 
-import android.content.ContentValues;
+
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Scanner;
+
+import java.io.StringBufferInputStream;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
 
 public class UtilisateurDAO {
 
-    String xml = null;
-    private static UtilisateurDAO instance = null;
 
+    private static UtilisateurDAO instance = null;
     private BaseDeDonnees accesseurBaseDeDonnees;
 
-
+    List<Utilisateur> listeUtilisateurs;
 
 
     public static UtilisateurDAO getInstance() {
@@ -32,11 +37,15 @@ public class UtilisateurDAO {
         {
             instance = new UtilisateurDAO();
         }
+
         return instance;
     }
 
     public UtilisateurDAO() {
+
         this.accesseurBaseDeDonnees = BaseDeDonnees.getInstance();
+        listeUtilisateurs = new ArrayList<>();
+
     }
 
     public String afficherUtilisateur(String pseudo){
@@ -49,6 +58,62 @@ public class UtilisateurDAO {
             return mdp;
         }
         return null;
+    }
+
+    public List<Utilisateur> listerUtilisateur() {
+        try {
+            String url = "http://158.69.113.110/findItServeur/utilisateur/liste/index.php";
+
+            String xml;
+            String derniereBalise = "</utilisateurs>";
+            HttpPostRequete postRequete = new HttpPostRequete();
+            xml = postRequete.execute(url, derniereBalise).get();
+
+            DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            @SuppressWarnings("deprecation")
+            Document document = parseur.parse(new StringBufferInputStream(xml));
+            String racine = document.getDocumentElement().getNodeName();
+            System.out.println(racine);
+
+
+            NodeList listeNoeudUtilisateur = document.getElementsByTagName("utilisateur");
+            for (int position = 0; position < listeNoeudUtilisateur.getLength(); position++) {
+
+                Element noeudUtilisateur = (Element) listeNoeudUtilisateur.item(position);
+
+                //System.out.println(noeudUtilisateur.getElementsByTagName("pseudo").item(0).getTextContent());
+                Utilisateur utilisateur = new Utilisateur();
+                String id = noeudUtilisateur.getElementsByTagName("utilisateur_id").item(0).getTextContent();
+                utilisateur.setId(Integer.parseInt(id));
+
+                String pseudo = noeudUtilisateur.getElementsByTagName("pseudo").item(0).getTextContent();
+                utilisateur.setPseudo(pseudo);
+                String mail = noeudUtilisateur.getElementsByTagName("mail").item(0).getTextContent();
+                utilisateur.setMail(mail);
+                String mdp = noeudUtilisateur.getElementsByTagName("mdp").item(0).getTextContent();
+                utilisateur.setMdp(mdp);
+
+
+                //listeVoyage.add(voyage);
+
+            }
+        }catch(InterruptedException e){
+            e.printStackTrace();
+
+        }catch(ParserConfigurationException e){
+            e.printStackTrace();
+
+        }catch(SAXException e){
+            e.printStackTrace();
+
+        }catch(IOException e){
+            e.printStackTrace();
+
+        }catch(ExecutionException e){
+            e.printStackTrace();
+
+        }
+        return listeUtilisateurs;
     }
 
     public int verifConnecction(String pseudo,String mdp){

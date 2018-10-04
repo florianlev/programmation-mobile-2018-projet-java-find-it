@@ -35,6 +35,7 @@ public class FindIt extends AppCompatActivity {
 
         BaseDeDonnees.getInstance(getApplicationContext());
         utilisateurDAO = utilisateurDAO.getInstance();
+        utilisateurDAO.listerUtilisateur();
 
         //Utilisateur utilisateur = new Utilisateur("test","testtoto", "test");
         //utilisateurDAO.ajouterUtilisateurSQL(utilisateur);

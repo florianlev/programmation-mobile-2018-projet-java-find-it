@@ -30,7 +30,14 @@
 			print_r($basededonnees->errorInfo());
 			return $reussite;
 			
-			
-        }	
+		}
+		
+		function verifierConnection($pseudo, $mdp){
+			$SQL_VERIF_CONNECTION = "SELECT count(utilisateur_id) as compteur FROM utilisateur WHERE pseudo ='".pseudo."' AND mdp ='".mdp."';
+			global $basededonnees;
+			$requeteVerifUtilisateur = $basededonnees->prepare($SQL_VERIF_CONNECTION);
+			$requeteVerifUtilisateur->execute();
+			return $requeteListeUtilisateurs->fetchAll(PDO::FETCH_OBJ);
+		}
     }
 ?>

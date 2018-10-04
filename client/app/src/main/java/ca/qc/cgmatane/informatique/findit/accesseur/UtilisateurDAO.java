@@ -80,8 +80,6 @@ public class UtilisateurDAO {
             for (int position = 0; position < listeNoeudUtilisateur.getLength(); position++) {
 
                 Element noeudUtilisateur = (Element) listeNoeudUtilisateur.item(position);
-
-                //System.out.println(noeudUtilisateur.getElementsByTagName("pseudo").item(0).getTextContent());
                 Utilisateur utilisateur = new Utilisateur();
                 String id = noeudUtilisateur.getElementsByTagName("utilisateur_id").item(0).getTextContent();
                 utilisateur.setId(Integer.parseInt(id));

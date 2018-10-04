@@ -24,12 +24,7 @@
         android:layout_marginBottom="20dp"
         android:text="Meilleurs scores:" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="50"
-        android:fillViewport="false"
-        android:visibility="visible">
+    
 
         <ListView
             android:id="@+id/vue_liste_score"
@@ -38,7 +33,6 @@
 
         </ListView>
 
-    </ScrollView>
 
     <Button
         android:id="@+id/action_naviguer_accueil"

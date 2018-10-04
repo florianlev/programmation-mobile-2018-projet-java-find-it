@@ -202,8 +202,8 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     
     public void recupererPossitionDestination() {
 
-        this.latitudeDestination = 48.840218;
-        this.longitudeDestination = -67.498787;
+        this.latitudeDestination = generertLatitudeNouvelleDestination();
+        this.longitudeDestination = genererLongitudeNouvelleDestination();
         LatLng positionDestination = new LatLng(latitudeDestination, longitudeDestination);
         //Toast.makeText(VueJeu.this, "latitude" + latitudeDestination + " longitude" + longitudeDestination, Toast.LENGTH_LONG).show();
 
@@ -237,28 +237,35 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     public boolean cestGagne(){
-        if (distanceInKmBetweenEarthCoordinates(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 1){
+        if (distanceInKmBetweenEarthCoordinates(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 0.1){
             System.out.println("Gagné");
-            setNewDestination();
             return true;
         }else{
             System.out.println("Marche encore");
             return false;
         }
     }
+    
 
-    public void setNewDestination(){
+    public double generertLatitudeNouvelleDestination(){
         double latitudeDestinationMax = 48.850020;
         double latitudeDestinationMin = 48.830022;
 
+        double latitudeNouvelleDestination = latitudeDestinationMin + (Math.random() * ((latitudeDestinationMax - latitudeDestinationMin)));
+        latitudeDestination = latitudeNouvelleDestination;
+        System.out.println("Nouvelle destination " + latitudeNouvelleDestination);
+
+        return latitudeNouvelleDestination;
+    }
+
+    public double genererLongitudeNouvelleDestination(){
         double longitudeDestinationMax = -67.535786;
         double longitudeDestinationMin = -67.491784;
 
         double longitudeNouvelleDestination = longitudeDestinationMin + (Math.random() * ((longitudeDestinationMax - longitudeDestinationMin)));
+        longitudeDestination = longitudeNouvelleDestination;
         System.out.println("Nouvelle destination " + longitudeNouvelleDestination);
 
-        double latitudeNouvelleDestination = latitudeDestinationMin + (Math.random() * ((latitudeDestinationMax - latitudeDestinationMin)));
-        System.out.println("Nouvelle destination " + latitudeNouvelleDestination);
-
+        return longitudeNouvelleDestination;
     }
 }

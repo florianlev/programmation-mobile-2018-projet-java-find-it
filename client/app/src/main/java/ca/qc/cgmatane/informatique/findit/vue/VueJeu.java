@@ -43,6 +43,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     private Marker marqueurDestination = null;
 
     protected double latitudeJoueur, longitudeJoueur;
+    protected double latitudeDestination, longitudeDestination;
 
 
     static final public int ACTIVITE_SCORE = 1;
@@ -201,16 +202,16 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     
     public void recupererPossitionDestination() {
 
-        double latitudeDestination = 48.840218;
-        double longitudeDestination = -67.498787;
-        LatLng possitionDestination = new LatLng(latitudeDestination, longitudeDestination);
+        this.latitudeDestination = 48.840218;
+        this.longitudeDestination = -67.498787;
+        LatLng positionDestination = new LatLng(latitudeDestination, longitudeDestination);
         //Toast.makeText(VueJeu.this, "latitude" + latitudeDestination + " longitude" + longitudeDestination, Toast.LENGTH_LONG).show();
 
         if (marqueurDestination == null) {
-            MarkerOptions options = new MarkerOptions().position(possitionDestination).title("Destination");
+            MarkerOptions options = new MarkerOptions().position(positionDestination).title("Destination");
             marqueurDestination = mMap.addMarker(options);
             } else {
-            marqueurDestination.setPosition(possitionDestination);
+            marqueurDestination.setPosition(positionDestination);
         }
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionDestination));
         //mMap.animateCamera(CameraUpdateFactory.zoomTo(14f));
@@ -236,7 +237,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     public boolean cestGagne(){
-        if (distanceInKmBetweenEarthCoordinates(48.840218, -67.498787, latitudeJoueur, longitudeJoueur) <= 1){
+        if (distanceInKmBetweenEarthCoordinates(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 1){
             System.out.println("Gagné");
             return true;
         }else{

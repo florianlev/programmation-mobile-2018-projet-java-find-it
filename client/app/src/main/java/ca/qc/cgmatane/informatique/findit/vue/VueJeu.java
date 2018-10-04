@@ -73,19 +73,21 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                 if (locationResult == null) {
                     return;
                 }
+
+
                 for (Location location : locationResult.getLocations()) {
                     latitudeJoueur = location.getLatitude();
                     longitudeJoueur = location.getLongitude();
-                    LatLng possitionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
+                    LatLng positionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
                     Toast.makeText(VueJeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
                     if (marqueurJoueur == null) {
-                        MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                        MarkerOptions options = new MarkerOptions().position(positionJoueur).title("Position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                         marqueurJoueur = mMap.addMarker(options);
                     } else {
-                        marqueurJoueur.setPosition(possitionJoueur);
+                        marqueurJoueur.setPosition(positionJoueur);
                     }
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionJoueur));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(positionJoueur));
                     mMap.animateCamera(CameraUpdateFactory.zoomTo(13f));
                 }
 
@@ -172,7 +174,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                         Toast.makeText(VueJeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
                         if (marqueurJoueur == null) {
-                            MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                            MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("Position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                             marqueurJoueur = mMap.addMarker(options);
                         } else {
                             marqueurJoueur.setPosition(possitionJoueur);
@@ -245,7 +247,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
             return false;
         }
     }
-    
+
 
     public double generertLatitudeNouvelleDestination(){
         double latitudeDestinationMax = 48.850020;

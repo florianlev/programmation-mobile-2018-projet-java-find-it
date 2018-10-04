@@ -7,6 +7,11 @@ public class Utilisateur {
     protected String mail;
     protected String mdp;
 
+
+    public Utilisateur() {
+        super();
+
+    }
     public Utilisateur(String pseudo, String mail, String mdp) {
         super();
         this.pseudo = pseudo;

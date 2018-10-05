@@ -46,13 +46,13 @@ public class VueAlarme extends AppCompatActivity {
         });
 
         Button prendrePhoto = (Button) findViewById(R.id.action_prendre_photo);
-        prendrePhoto.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
+        prendrePhoto.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View arg0){
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takePictureIntent, 1);
                 }
-                return false;
+
             }
         });
 

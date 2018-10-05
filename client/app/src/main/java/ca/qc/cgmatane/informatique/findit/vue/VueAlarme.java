@@ -1,21 +1,27 @@
 package ca.qc.cgmatane.informatique.findit.vue;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.Toast;
 
+
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import ca.qc.cgmatane.informatique.findit.R;
 
@@ -35,6 +41,17 @@ public class VueAlarme extends AppCompatActivity {
             public boolean onTouch(View arg0, MotionEvent arg1) {
                 //mMediaPlayer.stop();
                 naviguerAncienneActivite();
+                return false;
+            }
+        });
+
+        Button prendrePhoto = (Button) findViewById(R.id.action_prendre_photo);
+        prendrePhoto.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, 1);
+                }
                 return false;
             }
         });
@@ -78,5 +95,44 @@ public class VueAlarme extends AppCompatActivity {
             }
         }
         return alert;
+    }
+    private File creerFichierImage() throws IOException {
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String nomImage = "JPEG_" + timeStamp + "_";
+        File dossierDestination = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                nomImage,
+                ".jpg",
+                dossierDestination
+        );
+
+        String cheminPhoto = image.getAbsolutePath();
+        //Toast.makeText(getApplicationContext(),cheminPhoto, Toast.LENGTH_SHORT).show();
+        return image;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+
+            try {
+                creerFichierImage();
+                //Todo inplementer fonction d'envoie vers serveur
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }else if (resultCode == Activity.RESULT_CANCELED) {
+
+
+            Toast.makeText(getApplicationContext(), "Vous avez annuler la capture", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            Toast.makeText(getApplicationContext(),"Désolé! echec de capture photo", Toast.LENGTH_SHORT).show();
+        }
     }
 }

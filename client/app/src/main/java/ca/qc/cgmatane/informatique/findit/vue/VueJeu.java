@@ -55,8 +55,12 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
 
     protected ScoreDAO scoreDAO;
 
+    int initialisation = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_jeu);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -74,7 +78,6 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                     return;
                 }
 
-
                 for (Location location : locationResult.getLocations()) {
                     latitudeJoueur = location.getLatitude();
                     longitudeJoueur = location.getLongitude();
@@ -87,8 +90,13 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                     } else {
                         marqueurJoueur.setPosition(positionJoueur);
                     }
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(positionJoueur));
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(13f));
+
+                    if (initialisation == 0){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(positionJoueur));
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(13f));
+                        initialisation++;
+                    }
+
                 }
 
                 if (cestGagne()){
@@ -96,9 +104,9 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                     stopLocationUpdates();
                     activeAlarme();
                 }
+
             }
 
-            ;
         };
     }
 
@@ -204,7 +212,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     
     public void recupererPossitionDestination() {
 
-        this.latitudeDestination = generertLatitudeNouvelleDestination();
+        this.latitudeDestination = genererLatitudeNouvelleDestination();
         this.longitudeDestination = genererLongitudeNouvelleDestination();
         LatLng positionDestination = new LatLng(latitudeDestination, longitudeDestination);
         //Toast.makeText(VueJeu.this, "latitude" + latitudeDestination + " longitude" + longitudeDestination, Toast.LENGTH_LONG).show();
@@ -239,7 +247,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     public boolean cestGagne(){
-        if (distanceInKmBetweenEarthCoordinates(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 0.1){
+        if (distanceInKmBetweenEarthCoordinates(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 1){
             System.out.println("Gagné");
             return true;
         }else{
@@ -249,7 +257,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     }
 
 
-    public double generertLatitudeNouvelleDestination(){
+    public double genererLatitudeNouvelleDestination(){
         double latitudeDestinationMax = 48.850020;
         double latitudeDestinationMin = 48.830022;
 

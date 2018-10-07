@@ -82,7 +82,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                     latitudeJoueur = location.getLatitude();
                     longitudeJoueur = location.getLongitude();
                     LatLng positionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
-                    Toast.makeText(VueJeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(VueJeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
                     if (marqueurJoueur == null) {
                         MarkerOptions options = new MarkerOptions().position(positionJoueur).title("Position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
@@ -96,7 +96,6 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                         mMap.animateCamera(CameraUpdateFactory.zoomTo(13f));
                         initialisation++;
                     }
-
                 }
 
                 if (cestGagne()){
@@ -104,9 +103,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                     stopLocationUpdates();
                     activeAlarme();
                 }
-
             }
-
         };
     }
 
@@ -114,7 +111,6 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
         intentionNaviguerAlarme = new Intent(this, VueAlarme.class);
         startActivityForResult(intentionNaviguerAlarme, ACTIVITE_ALARME);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -156,10 +152,6 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
         recupererPossitionDestination();
         createLocationRequest();
         startLocationUpdates();
-        /*// Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
 
     public void recupererPossitionJoueur() {
@@ -179,7 +171,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                         double latitudeJoueur = location.getLatitude();
                         double longitudeJoueur = location.getLongitude();
                         LatLng possitionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
-                        Toast.makeText(VueJeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(VueJeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
                         if (marqueurJoueur == null) {
                             MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("Position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
@@ -247,7 +239,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     public boolean cestGagne(){
-        if (distanceInKmBetweenEarthCoordinates(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 1){
+        if (distanceInKmBetweenEarthCoordinates(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 10){
             System.out.println("Gagné");
             return true;
         }else{
@@ -277,5 +269,15 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
         System.out.println("Nouvelle destination " + longitudeNouvelleDestination);
 
         return longitudeNouvelleDestination;
+    }
+
+
+
+    protected void onActivityResult(int activite, int resultat, Intent donnees){
+        switch (activite){
+            case ACTIVITE_ALARME:
+                recreate();
+                break;
+        }
     }
 }

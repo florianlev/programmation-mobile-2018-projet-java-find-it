@@ -2,8 +2,13 @@ package ca.qc.cgmatane.informatique.findit.vue;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
@@ -28,6 +33,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+
+import java.io.File;
 
 import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
@@ -95,6 +102,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(positionJoueur));
                         mMap.animateCamera(CameraUpdateFactory.zoomTo(13f));
                         initialisation++;
+                        ouvrirDialogue();
                     }
                 }
 
@@ -239,7 +247,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     public boolean cestGagne(){
-        if (distanceInKmBetweenEarthCoordinates(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 10){
+        if (distanceInKmBetweenEarthCoordinates(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 0.1){
             System.out.println("Gagné");
             return true;
         }else{
@@ -247,7 +255,6 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
             return false;
         }
     }
-
 
     public double genererLatitudeNouvelleDestination(){
         double latitudeDestinationMax = 48.850020;
@@ -279,5 +286,19 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                 recreate();
                 break;
         }
+    }
+
+    public void ouvrirDialogue() {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Explications");
+        alertDialog.setMessage("Votre position est le pin bleu. Il faut se rendre vers le pin rouge (destination) pour gagner des points.");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Compris!",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+        alertDialog.show();
     }
 }

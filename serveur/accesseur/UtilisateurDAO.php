@@ -16,7 +16,7 @@
 			echo "ajouterUtilisateur()";
 			print_r($utilisateur);
 			
-			$SQL_AJOUTER_UTILISATEUR = "INSERT into utilisateur(pseudo, mail, mdp) VALUES('$utilisateur->pseudo','$utilisateur->mail','$utilisateur->mdp')";
+			$SQL_AJOUTER_UTILISATEUR = "INSERT into utilisateur(pseudo, mail, mdp) VALUES('$utilisateur->nom','$utilisateur->mail','$utilisateur->mdp')";
 			
 			echo $SQL_AJOUTER_UTILISATEUR;
 			global $basededonnees;
@@ -29,15 +29,14 @@
 			echo "Erreurs : ";
 			print_r($basededonnees->errorInfo());
 			return $reussite;
-			
-		}
-		
-		function verifierConnection($pseudo, $mdp){
-			$SQL_VERIF_CONNECTION = "SELECT count(utilisateur_id) as compteur FROM utilisateur WHERE pseudo ='".pseudo."' AND mdp ='".mdp."';
+		}	
+
+		function verifierConnection($utilisateur){
+			$SQL_VERIF_CONNECTION = "SELECT count(utilisateur_id) as nombre FROM utilisateur WHERE pseudo ='$utilisateur->pseudo' AND mdp ='$utilisateur->mdp'";
 			global $basededonnees;
 			$requeteVerifUtilisateur = $basededonnees->prepare($SQL_VERIF_CONNECTION);
 			$requeteVerifUtilisateur->execute();
-			return $requeteListeUtilisateurs->fetchAll(PDO::FETCH_OBJ);
+			return $requeteVerifUtilisateur->fetchAll(PDO::FETCH_OBJ);
 		}
     }
 ?>

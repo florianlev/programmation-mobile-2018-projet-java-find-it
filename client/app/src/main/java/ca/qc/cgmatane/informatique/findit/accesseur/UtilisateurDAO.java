@@ -33,8 +33,7 @@ public class UtilisateurDAO {
 
     public static UtilisateurDAO getInstance() {
 
-        if(null == instance)
-        {
+        if (null == instance) {
             instance = new UtilisateurDAO();
         }
 
@@ -48,12 +47,12 @@ public class UtilisateurDAO {
 
     }
 
-    public String afficherUtilisateur(String pseudo){
-        String LISTER_EVENEMENTS = "SELECT mdp FROM utilisateur WHERE pseudo ='"+pseudo+"';";
+    public String afficherUtilisateur(String pseudo) {
+        String LISTER_EVENEMENTS = "SELECT mdp FROM utilisateur WHERE pseudo ='" + pseudo + "';";
         Cursor curseur = accesseurBaseDeDonnees.getReadableDatabase().rawQuery(LISTER_EVENEMENTS,
                 null);
         String mdp;
-        for(curseur.moveToFirst();!curseur.isAfterLast();curseur.moveToNext()) {
+        for (curseur.moveToFirst(); !curseur.isAfterLast(); curseur.moveToNext()) {
             mdp = curseur.getString(curseur.getColumnIndex("mdp"));
             return mdp;
         }
@@ -95,40 +94,84 @@ public class UtilisateurDAO {
                 //listeVoyage.add(voyage);
 
             }
-        }catch(InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
 
-        }catch(ParserConfigurationException e){
+        } catch (ParserConfigurationException e) {
             e.printStackTrace();
 
-        }catch(SAXException e){
+        } catch (SAXException e) {
             e.printStackTrace();
 
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
 
-        }catch(ExecutionException e){
+        } catch (ExecutionException e) {
             e.printStackTrace();
 
         }
         return listeUtilisateurs;
     }
 
-    public int verifConnecction(String pseudo,String mdp){
-        String LISTER_EVENEMENTS = "SELECT count(utilisateur_id) as compteur FROM utilisateur WHERE pseudo ='"+pseudo+"' AND mdp ='"+mdp+"';";
+    /*public int verifConnecction(String pseudo, String mdp) {
+        String LISTER_EVENEMENTS = "SELECT count(utilisateur_id) as compteur FROM utilisateur WHERE pseudo ='" + pseudo + "' AND mdp ='" + mdp + "';";
         Cursor curseur = accesseurBaseDeDonnees.getReadableDatabase().rawQuery(LISTER_EVENEMENTS,
                 null);
         int compteur;
-        for(curseur.moveToFirst();!curseur.isAfterLast();curseur.moveToNext()) {
+        for (curseur.moveToFirst(); !curseur.isAfterLast(); curseur.moveToNext()) {
             compteur = curseur.getInt(curseur.getColumnIndex("compteur"));
             return compteur;
         }
         return 0;
+    }*/
+
+    public boolean verifierConnection(Utilisateur utilisateur){
+
+        try{
+            String url = "http://158.69.113.110/findItServeur/utilisateur/compteur/index.php?pseudo="+utilisateur.getPseudo()+"&mdp="+utilisateur.getMdp();
+            String xml;
+            String nombre;
+            String derniereBalise = "</compteurs>";
+            HttpPostRequete postRequete = new HttpPostRequete();
+            xml = postRequete.execute(url, derniereBalise).get();
+
+            DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            @SuppressWarnings("deprecation")
+            Document document = parseur.parse(new StringBufferInputStream(xml));
+            String racine = document.getDocumentElement().getNodeName();
+            NodeList listeNoeudCompteur = document.getElementsByTagName("compteur");
+            for (int position = 0; position < listeNoeudCompteur.getLength(); position++) {
+                Element noeudCompteur = (Element) listeNoeudCompteur.item(position);
+                nombre = noeudCompteur.getElementsByTagName("nombre").item(0).getTextContent();
+                if(Integer.parseInt(nombre) >=1){
+                    return true;
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+
+        } catch (SAXException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+
+        }
+        return false;
+
+
     }
 
     public void ajouterUtilisateurSQL(Utilisateur utilisateur){
 
         try{
+
             String url = "http://158.69.113.110/findItServeur/utilisateur/ajouter/index.php?pseudo="+utilisateur.getPseudo()+"&mail="+utilisateur.getMail()+"&mdp="+utilisateur.getMdp();
 
             String resultat;

@@ -1,14 +1,18 @@
 package ca.qc.cgmatane.informatique.findit.vue;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
+import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
 
 public class VueSeConnecter extends AppCompatActivity {
 
@@ -17,6 +21,7 @@ public class VueSeConnecter extends AppCompatActivity {
     protected Intent intentionNaviguerJouer;
     protected EditText champPseudo;
     protected EditText champMdp;
+    protected Utilisateur utilisateur;
 
     protected UtilisateurDAO accesseurUtilisateur = UtilisateurDAO.getInstance();
 
@@ -40,16 +45,19 @@ public class VueSeConnecter extends AppCompatActivity {
     }
 
     private void verifierConnection() {
-        String pseudo =champPseudo.getText().toString();
-        String mdp =champMdp.getText().toString();
-        int verif=accesseurUtilisateur.verifConnecction(pseudo,mdp);
-        if(verif>= 1){
-            startActivityForResult(intentionNaviguerJouer, ACTIVITE_JOUER);
+        utilisateur = new Utilisateur(champPseudo.getText().toString(), champMdp.getText().toString());
+        Toast toast = Toast.makeText(getApplicationContext(), "Mail ou mot de passe incorrect", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
 
+
+        Dialog dialog = new Dialog(this);
+
+        if (accesseurUtilisateur.verifierConnection(utilisateur)) {
+            System.out.println("GAGNER");
+            startActivityForResult(intentionNaviguerJouer, ACTIVITE_JOUER);
         }
         else{
-            System.out.println("ERREUR");
-
+            toast.show();
         }
     }
 }

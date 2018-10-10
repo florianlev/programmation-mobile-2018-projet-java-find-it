@@ -18,6 +18,11 @@ public class Utilisateur {
         this.mail = mail;
         this.mdp = mdp;
     }
+    public Utilisateur(String pseudo, String mdp) {
+        super();
+        this.pseudo = pseudo;
+        this.mdp = mdp;
+    }
 
     public int getId() {
         return id;

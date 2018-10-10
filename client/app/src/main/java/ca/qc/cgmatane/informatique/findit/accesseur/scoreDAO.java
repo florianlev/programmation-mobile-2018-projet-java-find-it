@@ -59,7 +59,7 @@ public class ScoreDAO {
     {
         for(Score scoreRecherche : this.listeScores)
         {
-            if(scoreRecherche.getId() == id_score) return scoreRecherche;
+            if(scoreRecherche.getId_score() == id_score) return scoreRecherche;
         }
         return null;
     }
@@ -73,7 +73,7 @@ public class ScoreDAO {
         value.put("valeur", Score.getValeur());
 
 
-        db.update("Score",value,"score_id = ? ",new String[] {String.valueOf(Score.getId())});
+        db.update("Score",value,"score_id = ? ",new String[] {String.valueOf(Score.getId_score())});
 
     }
 

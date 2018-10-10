@@ -3,20 +3,20 @@ package ca.qc.cgmatane.informatique.findit.modele;
 import java.util.HashMap;
 
 public class Score {
-    protected int id;
+    protected int id_score;
     protected int valeur;
 
-    public Score(int id, int valeur) {
-        this.id = id;
+    public Score(int id_score, int valeur) {
+        this.id_score = id_score;
         this.valeur = valeur;
     }
 
-    public int getId() {
-        return id;
+    public int getId_score() {
+        return id_score;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_score(int id_score) {
+        this.id_score = id_score;
     }
 
     public int getValeur() {
@@ -30,7 +30,7 @@ public class Score {
     {
         HashMap<String, String> scorePourAdapteur = new HashMap<String,String>();
         scorePourAdapteur.put("valeur", ""+this.valeur);
-        scorePourAdapteur.put("id",""+this.id);
+        scorePourAdapteur.put("id_score",""+this.id_score);
         return scorePourAdapteur;
     }
 }

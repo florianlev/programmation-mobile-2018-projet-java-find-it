@@ -4,9 +4,21 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
+import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import ca.qc.cgmatane.informatique.findit.modele.Score;
 
@@ -27,33 +39,59 @@ public class ScoreDAO {
 
     public ScoreDAO(){
         this.accesseurBaseDeDonnees = BaseDeDonnees.getInstance();
-        listeScores =new ArrayList<Score>();
+        listeScores = new ArrayList<>();
 
     }
+
+
 
     public List<Score> listerScore() {
-        String LISTER_SCORES = "SELECT * FROM score";
-        Cursor curseur = accesseurBaseDeDonnees.getReadableDatabase().rawQuery(LISTER_SCORES,
-                null);
-        this.listeScores.clear();
-        Score Score;
+        try {
+            String url = "http://158.69.113.110/findItServeur/score/liste/indexScore.php";
+            String xml;
+            String derniereBalise = "</scores>";
+            HttpPostRequete postRequete = new HttpPostRequete();
+            xml = postRequete.execute(url, derniereBalise).get();
 
-        int indexId_score = curseur.getColumnIndex("score_id");
-        int indexValeur = curseur.getColumnIndex("valeur");
+            DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            @SuppressWarnings("deprecation")
 
+            Document document = parseur.parse(new StringBufferInputStream(xml));
+            String racine = document.getDocumentElement().getNodeName();
+            NodeList listeNoeudScore = document.getElementsByTagName("score");
 
+            for (int position = 0; position < listeNoeudScore.getLength(); position++) {
+                Element noeudScore = (Element) listeNoeudScore.item(position);
+                Score score = new Score();
+                String id = noeudScore.getElementsByTagName("id").item(0).getTextContent();
+                score.setId_score(Integer.parseInt(id));
+                String valeur = noeudScore.getElementsByTagName("valeur").item(0).getTextContent();
+                score.setValeur(Integer.parseInt(valeur));
 
-        for(curseur.moveToFirst();!curseur.isAfterLast();curseur.moveToNext()) {
-            int id_score = curseur.getInt(indexId_score);
-            int valeur = curseur.getInt(indexValeur);
+                String id_utilisateur = noeudScore.getElementsByTagName("utilisateur_id").item(0).getTextContent();
+                score.setId_utilisateur(Integer.parseInt(id_utilisateur));
 
+                listeScores.add(score);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
 
-            Score = new Score(id_score,valeur);
-            this.listeScores.add(Score);
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+
+        } catch (SAXException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+
         }
-
         return listeScores;
     }
+
 
     public Score trouverScore(int id_score)
     {

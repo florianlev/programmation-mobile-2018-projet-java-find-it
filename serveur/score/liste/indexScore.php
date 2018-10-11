@@ -16,8 +16,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
     {
         ?>
         <score>
-            <id><?=($score->id_score)?></id>
-            <score><?=($score->score)?></score>
+            <id><?=($score->score_id)?></id>
+            <valeur><?=($score->score)?></valeur>
             <utilisateur_id><?=$score->utilisateur_id?></utilisateur_id>
         </score>
         <?php

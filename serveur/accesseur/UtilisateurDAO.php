@@ -40,7 +40,7 @@
 		}
 
 		function recupererIdUtilisateur($utilisateur){
-			$SQL_RECUP_ID = "SELECT utilisateur_id FROM utilisateur WHERE pseudo ='$utilisateur->pseudo' AND mail ='$utilisateur->mail'";
+			$SQL_RECUP_ID = "SELECT utilisateur_id FROM utilisateur WHERE pseudo ='$utilisateur->pseudo' AND mdp ='$utilisateur->mdp'";
 			global $basededonnees;
 			$requeteRecupId = $basededonnees->prepare($SQL_RECUP_ID);
 			$requeteRecupId->execute();

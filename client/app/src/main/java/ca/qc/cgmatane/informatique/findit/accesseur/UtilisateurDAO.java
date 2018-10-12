@@ -164,8 +164,45 @@ public class UtilisateurDAO {
 
         }
         return false;
+    }
 
+    public int recupererIdUtilisateur(Utilisateur utilisateur){
+        try{
+            String url = "http://158.69.113.110/findItServeur/utilisateur/recupererId/index.php?pseudo="+utilisateur.getPseudo()+"&mail="+utilisateur.getMail();
+            String xml;
+            String id;
+            String derniereBalise = "</utilisateurs>";
+            HttpPostRequete postRequete = new HttpPostRequete();
+            xml = postRequete.execute(url, derniereBalise).get();
 
+            DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            @SuppressWarnings("deprecation")
+            Document document = parseur.parse(new StringBufferInputStream(xml));
+            String racine = document.getDocumentElement().getNodeName();
+            NodeList listeNoeudUtilisateur = document.getElementsByTagName("compteur");
+            for (int position = 0; position < listeNoeudUtilisateur.getLength(); position++) {
+                Element noeudUtilisateur = (Element) listeNoeudUtilisateur.item(position);
+                id = noeudUtilisateur.getElementsByTagName("id").item(0).getTextContent();
+                return Integer.parseInt(id);
+
+            }
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+
+        } catch (SAXException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+
+        }
+    return 0;
     }
 
     public void ajouterUtilisateurSQL(Utilisateur utilisateur){

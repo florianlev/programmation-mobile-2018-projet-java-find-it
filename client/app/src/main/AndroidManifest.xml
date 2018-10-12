@@ -49,7 +49,8 @@
             android:required="false" />
 
         <activity android:name=".vue.VueGalerie" />
-        <activity android:name=".vue.VueAlarme"></activity>
+        <activity android:name=".vue.VueAlarme" />
+        <activity android:name=".vue.VueAfficherImage"></activity>
     </application>
 
 </manifest>

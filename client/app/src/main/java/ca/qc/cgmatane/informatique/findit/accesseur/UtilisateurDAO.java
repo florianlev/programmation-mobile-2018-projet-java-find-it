@@ -77,7 +77,7 @@ public class UtilisateurDAO {
                 utilisateur.setMdp(mdp);
 
 
-                //listeVoyage.add(voyage);
+                listeUtilisateurs.add(utilisateur);
 
             }
         } catch (InterruptedException e) {
@@ -176,7 +176,7 @@ public class UtilisateurDAO {
             e.printStackTrace();
 
         }
-    return 0;
+        return 0;
     }
 
     public void ajouterUtilisateurSQL(Utilisateur utilisateur){
@@ -193,5 +193,14 @@ public class UtilisateurDAO {
         }catch(ExecutionException e){
             System.out.println("got interrupted!");
         }
+    }
+    public Utilisateur trouverUtilisateur(int id_Utilisateur)
+    {
+        for(Utilisateur utilisateurRecherche : this.listerUtilisateur())
+        {
+
+            if(utilisateurRecherche.getId()== id_Utilisateur) return utilisateurRecherche;
+        }
+        return null;
     }
 }

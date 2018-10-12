@@ -2,6 +2,8 @@ package ca.qc.cgmatane.informatique.findit.modele;
 
 import java.util.HashMap;
 
+import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
+
 public class Score {
     protected int id_score;
     protected int valeur;
@@ -50,9 +52,13 @@ public class Score {
 
     public HashMap<String, String> obtenirScorePourAdapteur()
     {
+        UtilisateurDAO utilisateurDAO= UtilisateurDAO.getInstance();
+        Utilisateur utilisateur = utilisateurDAO.trouverUtilisateur(this.id_utilisateur);
+        String speudo =utilisateur.getPseudo();
         HashMap<String, String> scorePourAdapteur = new HashMap<String,String>();
         scorePourAdapteur.put("valeur", ""+this.valeur);
         scorePourAdapteur.put("id_score",""+this.id_score);
+        scorePourAdapteur.put("joueur",""+speudo);
         return scorePourAdapteur;
     }
 }

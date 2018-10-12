@@ -28,14 +28,14 @@ public class VueScore extends AppCompatActivity {
         BaseDeDonnees.getInstance(getApplicationContext());
         accesseurScore = ScoreDAO.getInstance();
         vuelistScore = (ListView) findViewById(R.id.vue_liste_score);
-
+        afficherTousLesEvenement();
         Button actionNaviguerAccueil = (Button) findViewById(R.id.action_naviguer_accueil);
         actionNaviguerAccueil.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){
                 retourAncienneActivite();
             }
         });
-        afficherTousLesEvenement();
+
     }
 
     public void retourAncienneActivite(){
@@ -45,12 +45,10 @@ public class VueScore extends AppCompatActivity {
     protected void afficherTousLesEvenement(){
         listeScorePourAdapteur = accesseurScore.recuperereListeScorePourAdapteur();
         SimpleAdapter adapteur = new SimpleAdapter(this, listeScorePourAdapteur,
-                android.R.layout.simple_list_item_1,
-                new String[] {"valeur"},
-                new int[] {android.R.id.text1});
-
-
-
+                android.R.layout.two_line_list_item,
+                new String[] {"valeur","joueur"},
+                new int[] {android.R.id.text1, android.R.id.text2});
         vuelistScore.setAdapter(adapteur);
     }
+
 }

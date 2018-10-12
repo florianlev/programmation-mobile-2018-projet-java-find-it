@@ -47,6 +47,7 @@ public class ScoreDAO {
 
 
     public List<Score> listerScore() {
+
         try {
             String url = "http://158.69.113.110/findItServeur/score/liste/indexScore.php";
             String xml;
@@ -60,7 +61,7 @@ public class ScoreDAO {
             Document document = parseur.parse(new StringBufferInputStream(xml));
             String racine = document.getDocumentElement().getNodeName();
             NodeList listeNoeudScore = document.getElementsByTagName("score");
-
+            listeScores.clear();
             for (int position = 0; position < listeNoeudScore.getLength(); position++) {
                 Element noeudScore = (Element) listeNoeudScore.item(position);
                 Score score = new Score();

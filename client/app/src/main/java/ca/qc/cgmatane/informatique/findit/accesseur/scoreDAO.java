@@ -128,12 +128,18 @@ public class ScoreDAO {
         return listeScorePourAdapteur;
     }
 
-    public void ajouterScore(Score Score)
+    public void ajouterScore(Score score)
     {
+        try{
+            String url = "http://158.69.113.110/findItServeur/score/ajouter/index.php?valeur="+ score.getValeur()+"&utilisateur_id="+score.getId_utilisateur();
 
-
+            String resultat;
+            HttpGetRequete getRequete = new HttpGetRequete();
+            resultat = getRequete.execute(url).get();
+        }catch(InterruptedException e){
+            System.out.println("got interrupted!");
+        }catch(ExecutionException e){
+            System.out.println("got interrupted!");
+        }
     }
-
-
-
 }

@@ -58,6 +58,7 @@ public class VueSeConnecter extends AppCompatActivity {
 
     private void verifierConnection() {
         utilisateur = new Utilisateur(champPseudo.getText().toString(), champMdp.getText().toString());
+        utilisateur.setId(accesseurUtilisateur.recupererIdUtilisateur(utilisateur));
         Toast toast = Toast.makeText(getApplicationContext(), "Mail ou mot de passe incorrect", Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
 
@@ -69,7 +70,6 @@ public class VueSeConnecter extends AppCompatActivity {
             if(checkBoxConnecter.isChecked()) {
                 SharedPreferences.Editor editeur = preferences.edit();
                 editeur.putString("pseudo", utilisateur.getPseudo());
-                System.out.println("ID VUE CONNECTION : " + utilisateur.getId());
                 editeur.putInt("id", utilisateur.getId());
                 editeur.putBoolean("estConnecter", true);
                 editeur.commit();

@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import ca.qc.cgmatane.informatique.findit.accesseur.BaseDeDonnees;
-import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
+//import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
 import ca.qc.cgmatane.informatique.findit.modele.Score;
 import ca.qc.cgmatane.informatique.findit.vue.VueCommencer;
@@ -32,7 +32,7 @@ public class FindIt extends AppCompatActivity {
 
     protected Intent intentionNaviguerScore;
     protected UtilisateurDAO utilisateurDAO;
-    protected ScoreDAO scoreDAO;
+    //protected ScoreDAO scoreDAO;
 
     SharedPreferences preferences;
 
@@ -48,7 +48,7 @@ public class FindIt extends AppCompatActivity {
         BaseDeDonnees.getInstance(getApplicationContext());
         utilisateurDAO = utilisateurDAO.getInstance();
 
-        scoreDAO = scoreDAO.getInstance();
+        //scoreDAO = scoreDAO.getInstance();
 
         //utilisateurDAO.listerUtilisateur();
 
@@ -62,8 +62,9 @@ public class FindIt extends AppCompatActivity {
 
         if(preferences.getBoolean("estConnecter",false)){
             textUtilisateur.setText("Welcome : " + preferences.getString("pseudo", null));
-            System.out.println("ID : " +  preferences.getInt("id",0));
-            Score score = new Score(40000, preferences.getInt("id",0));
+
+            //TEST AJOUTER SCORE DANS BDD
+            //Score score = new Score(4000550, preferences.getInt("id",0));
             //scoreDAO.ajouterScore(score);
         }else{
             //Vidage des session si l'utilisateur n'a pas cocher rester connecter

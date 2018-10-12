@@ -145,7 +145,7 @@ public class UtilisateurDAO {
             String url = "http://158.69.113.110/findItServeur/utilisateur/recupererId/index.php?pseudo="+utilisateur.getPseudo()+"&mdp="+utilisateur.getMdp();
             String xml;
             String id;
-            String derniereBalise = "</utilisateurs>";
+            String derniereBalise = "</Utilisateurs>";
             HttpPostRequete postRequete = new HttpPostRequete();
             xml = postRequete.execute(url, derniereBalise).get();
 
@@ -153,7 +153,7 @@ public class UtilisateurDAO {
             @SuppressWarnings("deprecation")
             Document document = parseur.parse(new StringBufferInputStream(xml));
             String racine = document.getDocumentElement().getNodeName();
-            NodeList listeNoeudUtilisateur = document.getElementsByTagName("compteur");
+            NodeList listeNoeudUtilisateur = document.getElementsByTagName("utilisateur");
             for (int position = 0; position < listeNoeudUtilisateur.getLength(); position++) {
                 Element noeudUtilisateur = (Element) listeNoeudUtilisateur.item(position);
                 id = noeudUtilisateur.getElementsByTagName("id").item(0).getTextContent();

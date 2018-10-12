@@ -116,7 +116,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                 }
 
                 if (cestGagne()){
-                    scoreDAO.ajouterScore(new Score(1, 1000,preferences.getInt("id",0)));
+                    scoreDAO.ajouterScore(new Score(1000,preferences.getInt("id",0)));
                     stopLocationUpdates();
                     activeAlarme();
                 }

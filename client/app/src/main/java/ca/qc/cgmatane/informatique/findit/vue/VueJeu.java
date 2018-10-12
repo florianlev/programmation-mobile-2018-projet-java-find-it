@@ -37,6 +37,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.File;
 
+import ca.qc.cgmatane.informatique.findit.FindIt;
 import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
 import ca.qc.cgmatane.informatique.findit.modele.Score;
@@ -57,9 +58,12 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     static final public int ACTIVITE_SCORE = 1;
     static final public int ACTIVITE_GALERIE = 2;
     static final public int ACTIVITE_ALARME = 3;
+    static final public int ACTIVITE_VUE_ACCUEIL = 4;
+
     protected Intent intentionNaviguerScore;
     protected Intent intentionNaviguerGalerie;
     protected Intent intentionNaviguerAlarme;
+    protected Intent intentionNaviguerCommencer;
 
     protected ScoreDAO scoreDAO;
 
@@ -146,6 +150,14 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
             intentionNaviguerGalerie = new Intent(this, VueGalerie.class);
             startActivityForResult(intentionNaviguerGalerie, ACTIVITE_GALERIE);
             return true;
+        }
+
+        if(id == R.id.nav_deconnection){
+            intentionNaviguerCommencer = new Intent(this, FindIt.class);
+            SharedPreferences.Editor editeur = preferences.edit();
+            editeur.clear();
+            editeur.commit();
+            startActivityForResult(intentionNaviguerCommencer, ACTIVITE_VUE_ACCUEIL);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -4,7 +4,7 @@ class ScoreDAO
 {
     function listerScores()
     {
-        $LISTER_SCORES = "SELECT * FROM score";
+        $LISTER_SCORES = "SELECT * FROM score ORDER BY score DESC ";
         global $basededonnees;
         $requeteListeScores = $basededonnees->prepare($LISTER_SCORES);
         $requeteListeScores->execute();

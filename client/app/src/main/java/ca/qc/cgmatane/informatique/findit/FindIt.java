@@ -13,8 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import ca.qc.cgmatane.informatique.findit.accesseur.BaseDeDonnees;
+import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
-import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
+import ca.qc.cgmatane.informatique.findit.modele.Score;
 import ca.qc.cgmatane.informatique.findit.vue.VueCommencer;
 import ca.qc.cgmatane.informatique.findit.vue.VueJeu;
 import ca.qc.cgmatane.informatique.findit.vue.VueScore;
@@ -31,6 +32,7 @@ public class FindIt extends AppCompatActivity {
 
     protected Intent intentionNaviguerScore;
     protected UtilisateurDAO utilisateurDAO;
+    protected ScoreDAO scoreDAO;
 
     SharedPreferences preferences;
 
@@ -42,9 +44,13 @@ public class FindIt extends AppCompatActivity {
 
         setContentView(R.layout.vue_accueil);
 
+
         BaseDeDonnees.getInstance(getApplicationContext());
         utilisateurDAO = utilisateurDAO.getInstance();
-        utilisateurDAO.listerUtilisateur();
+
+        scoreDAO = scoreDAO.getInstance();
+
+        //utilisateurDAO.listerUtilisateur();
 
         preferences = getSharedPreferences("detail_utilisateur",MODE_PRIVATE);
 
@@ -56,7 +62,16 @@ public class FindIt extends AppCompatActivity {
 
         if(preferences.getBoolean("estConnecter",false)){
             textUtilisateur.setText("Welcome : " + preferences.getString("pseudo", null));
+            System.out.println("ID : " +  preferences.getInt("id",0));
+            Score score = new Score(40000, preferences.getInt("id",0));
+            //scoreDAO.ajouterScore(score);
+        }else{
+            //Vidage des session si l'utilisateur n'a pas cocher rester connecter
+            SharedPreferences.Editor editeur = preferences.edit();
+            editeur.clear();
+            editeur.commit();
         }
+
         actionNaviguerCommencer.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){
                 System.out.println(preferences.getString("pseudo",null));

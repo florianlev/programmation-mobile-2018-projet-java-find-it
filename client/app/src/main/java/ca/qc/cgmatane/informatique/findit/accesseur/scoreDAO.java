@@ -1,6 +1,7 @@
 package ca.qc.cgmatane.informatique.findit.accesseur;
 
 import android.content.ContentValues;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -22,8 +23,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import ca.qc.cgmatane.informatique.findit.modele.Score;
 
-public class ScoreDAO {
 
+public class ScoreDAO {
 
     private static ScoreDAO instance =null;
     private BaseDeDonnees accesseurBaseDeDonnees;

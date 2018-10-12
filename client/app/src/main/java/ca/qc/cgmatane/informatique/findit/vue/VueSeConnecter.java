@@ -69,6 +69,7 @@ public class VueSeConnecter extends AppCompatActivity {
             if(checkBoxConnecter.isChecked()) {
                 SharedPreferences.Editor editeur = preferences.edit();
                 editeur.putString("pseudo", utilisateur.getPseudo());
+                System.out.println("ID VUE CONNECTION : " + utilisateur.getId());
                 editeur.putInt("id", utilisateur.getId());
                 editeur.putBoolean("estConnecter", true);
                 editeur.commit();

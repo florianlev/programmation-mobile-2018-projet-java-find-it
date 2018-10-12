@@ -7,20 +7,22 @@ public class Score {
     protected int valeur;
     protected int id_utilisateur;
 
+    public Score(){
+        super();
+    }
+
+    public Score(int valeur, int id_utilisateur){
+        super();
+        this.valeur = valeur;
+        this.id_utilisateur = id_utilisateur;
+    }
     public Score(int id_score, int valeur, int id_utilisateur) {
         super();
         this.id_score = id_score;
         this.valeur = valeur;
         this.id_utilisateur = id_utilisateur;
     }
-    public Score(int id_score, int valeur) {
-        super();
-        this.id_score = id_score;
-        this.valeur = valeur;
-    }
-    public Score(){
-        super();
-    }
+
 
     public int getId_utilisateur() {
         return id_utilisateur;

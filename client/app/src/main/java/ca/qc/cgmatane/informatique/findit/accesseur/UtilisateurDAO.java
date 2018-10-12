@@ -1,8 +1,5 @@
 package ca.qc.cgmatane.informatique.findit.accesseur;
 
-
-import android.database.Cursor;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -47,17 +44,6 @@ public class UtilisateurDAO {
 
     }
 
-    public String afficherUtilisateur(String pseudo) {
-        String LISTER_EVENEMENTS = "SELECT mdp FROM utilisateur WHERE pseudo ='" + pseudo + "';";
-        Cursor curseur = accesseurBaseDeDonnees.getReadableDatabase().rawQuery(LISTER_EVENEMENTS,
-                null);
-        String mdp;
-        for (curseur.moveToFirst(); !curseur.isAfterLast(); curseur.moveToNext()) {
-            mdp = curseur.getString(curseur.getColumnIndex("mdp"));
-            return mdp;
-        }
-        return null;
-    }
 
     public List<Utilisateur> listerUtilisateur() {
         try {
@@ -113,18 +99,6 @@ public class UtilisateurDAO {
         return listeUtilisateurs;
     }
 
-    /*public int verifConnecction(String pseudo, String mdp) {
-        String LISTER_EVENEMENTS = "SELECT count(utilisateur_id) as compteur FROM utilisateur WHERE pseudo ='" + pseudo + "' AND mdp ='" + mdp + "';";
-        Cursor curseur = accesseurBaseDeDonnees.getReadableDatabase().rawQuery(LISTER_EVENEMENTS,
-                null);
-        int compteur;
-        for (curseur.moveToFirst(); !curseur.isAfterLast(); curseur.moveToNext()) {
-            compteur = curseur.getInt(curseur.getColumnIndex("compteur"));
-            return compteur;
-        }
-        return 0;
-    }*/
-
     public boolean verifierConnection(Utilisateur utilisateur){
 
         try{
@@ -168,7 +142,7 @@ public class UtilisateurDAO {
 
     public int recupererIdUtilisateur(Utilisateur utilisateur){
         try{
-            String url = "http://158.69.113.110/findItServeur/utilisateur/recupererId/index.php?pseudo="+utilisateur.getPseudo()+"&mail="+utilisateur.getMail();
+            String url = "http://158.69.113.110/findItServeur/utilisateur/recupererId/index.php?pseudo="+utilisateur.getPseudo()+"&mdp="+utilisateur.getMdp();
             String xml;
             String id;
             String derniereBalise = "</utilisateurs>";

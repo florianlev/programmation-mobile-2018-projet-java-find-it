@@ -38,5 +38,13 @@
 			$requeteVerifUtilisateur->execute();
 			return $requeteVerifUtilisateur->fetchAll(PDO::FETCH_OBJ);
 		}
+
+		function recupererIdUtilisateur($utilisateur){
+			$SQL_RECUP_ID = "SELECT utilisateur_id FROM utilisateur WHERE pseudo ='$utilisateur->pseudo' AND mail ='$utilisateur->mail'";
+			global $basededonnees;
+			$requeteRecupId = $basededonnees->prepare($SQL_RECUP_ID);
+			$requeteRecupId->execute();
+			return $requeteRecupId->fetchAll(PDO::FETCH_OBJ);
+		}
     }
 ?>

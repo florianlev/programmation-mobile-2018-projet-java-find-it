@@ -6,7 +6,7 @@ $utilisateurDAO = new UtilisateurDAO();
 $utilisateur = new stdClass();
 
 $utilisateur->pseudo = $_GET['pseudo'];
-$utilisateur->mail = $_GET['mail'];
+$utilisateur->mdp = $_GET['mdp'];
 
     
 $idUtilisateur = $utilisateurDAO->recupererIdUtilisateur($utilisateur);

@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -64,6 +65,9 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
 
     int initialisation = 0;
 
+    SharedPreferences preferences;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,9 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         scoreDAO = scoreDAO.getInstance();
+
+        preferences = getSharedPreferences("detail_utilisateur",MODE_PRIVATE);
+        System.out.println("YOOO " + preferences.getString("pseudo",null));
 
         mLocationCallback = new LocationCallback() {
             @Override

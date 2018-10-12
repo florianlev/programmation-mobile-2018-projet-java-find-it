@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
 
     tools:context=".FindIt">
 
@@ -13,7 +12,9 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="24dp"
         android:gravity="center_horizontal"
         android:text="FIND IT" />
 
@@ -21,23 +22,40 @@
         android:id="@+id/action_naviguer_commencer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="193dp"
         android:text="Commencer" />
 
     <Button
         android:id="@+id/action_naviguer_score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="410dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:text="MEILLEURS SCORES" />
 
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textView_utilisateur_vue_accueil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="159dp"
         android:gravity="center_horizontal"
-        android:text="Crédits : Antoine Herkens, Florian Lévy, Cyrille Hamel" />
-</LinearLayout>
+        android:text="Pas encore authentifier ?" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp"
+        android:gravity="center"
+        android:text="Crédits : Antoine Herkens, Florian Levy, Cyrille Hamel" />
+</RelativeLayout>
 
 

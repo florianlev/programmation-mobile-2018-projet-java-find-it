@@ -129,11 +129,6 @@ public class ScoreDAO {
 
     public void ajouterScore(Score Score)
     {
-        SQLiteDatabase db = accesseurBaseDeDonnees.getWritableDatabase();
-        ContentValues value = new ContentValues();
-        value.put("valeur", Score.getValeur());
-        db.insert("Score",null,value);
-        System.out.println("SUCCES AJOUT");
 
 
     }

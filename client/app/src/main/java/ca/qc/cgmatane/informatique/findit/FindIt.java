@@ -2,6 +2,7 @@ package ca.qc.cgmatane.informatique.findit;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -9,21 +10,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import ca.qc.cgmatane.informatique.findit.accesseur.BaseDeDonnees;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
 import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
 import ca.qc.cgmatane.informatique.findit.vue.VueCommencer;
+import ca.qc.cgmatane.informatique.findit.vue.VueJeu;
 import ca.qc.cgmatane.informatique.findit.vue.VueScore;
 
 public class FindIt extends AppCompatActivity {
 
     static final public int ACTIVITE_COMMENCER = 1;
     static final public int ACTIVITE_SCORE = 2;
+    static final public int ACTIVITE_JEU = 3;
+
 
     protected Intent intentionNaviguerCommencer;
+    protected Intent intentionNaviguerVueJeu;
+
     protected Intent intentionNaviguerScore;
     protected UtilisateurDAO utilisateurDAO;
+
+    SharedPreferences preferences;
 
 
     @Override
@@ -37,18 +46,29 @@ public class FindIt extends AppCompatActivity {
         utilisateurDAO = utilisateurDAO.getInstance();
         utilisateurDAO.listerUtilisateur();
 
-        //Utilisateur utilisateur = new Utilisateur("test","testtoto", "test");
-        //utilisateurDAO.ajouterUtilisateurSQL(utilisateur);
+        preferences = getSharedPreferences("detail_utilisateur",MODE_PRIVATE);
 
         intentionNaviguerCommencer = new Intent(this, VueCommencer.class);
+        intentionNaviguerScore = new Intent(this, VueScore.class);
+        intentionNaviguerVueJeu = new Intent(this, VueJeu.class);
         Button actionNaviguerCommencer = (Button) findViewById(R.id.action_naviguer_commencer);
+        TextView textUtilisateur = (TextView) findViewById(R.id.textView_utilisateur_vue_accueil);
+
+        if(preferences.getBoolean("estConnecter",false)){
+            textUtilisateur.setText("Welcome : " + preferences.getString("pseudo", null));
+        }
         actionNaviguerCommencer.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){
-                startActivityForResult(intentionNaviguerCommencer, ACTIVITE_COMMENCER);
+                System.out.println(preferences.getString("pseudo",null));
+                if (preferences.getBoolean("estConnecter", false)){
+                    startActivityForResult(intentionNaviguerVueJeu,ACTIVITE_JEU);
+                }
+                else{
+                    startActivityForResult(intentionNaviguerCommencer, ACTIVITE_COMMENCER);
+                }
             }
         });
 
-        intentionNaviguerScore = new Intent(this, VueScore.class);
         Button actionNaviguerScore = (Button) findViewById(R.id.action_naviguer_score);
         actionNaviguerScore.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){

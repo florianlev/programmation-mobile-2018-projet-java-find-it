@@ -45,7 +45,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="159dp"
         android:gravity="center_horizontal"
-        android:text="Pas encore authentifier ?" />
+        android:text="Pas encore authentifié ?" />
 
     <TextView
         android:id="@+id/textView5"

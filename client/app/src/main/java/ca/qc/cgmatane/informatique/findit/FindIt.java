@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ import ca.qc.cgmatane.informatique.findit.accesseur.BaseDeDonnees;
 //import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
 import ca.qc.cgmatane.informatique.findit.modele.Score;
+import ca.qc.cgmatane.informatique.findit.vue.MyGestureListener;
 import ca.qc.cgmatane.informatique.findit.vue.VueCommencer;
 import ca.qc.cgmatane.informatique.findit.vue.VueJeu;
 import ca.qc.cgmatane.informatique.findit.vue.VueScore;
@@ -35,6 +38,9 @@ public class FindIt extends AppCompatActivity {
     //protected ScoreDAO scoreDAO;
 
     SharedPreferences preferences;
+
+    private GestureDetectorCompat mDetector;
+
 
 
     @Override
@@ -98,6 +104,16 @@ public class FindIt extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{
                     Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
+
+        mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+
+    }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
     }
 }
 

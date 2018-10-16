@@ -14,9 +14,11 @@ import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -29,6 +31,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -70,6 +73,10 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
     int initialisation = 0;
 
     SharedPreferences preferences;
+
+    UiSettings uiSettings;
+    private GestureDetectorCompat mDetector;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +129,21 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                 }
             }
         };
+
+        mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+
+
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+
+
+
 
     public void activeAlarme(){
         intentionNaviguerAlarme = new Intent(this, VueAlarme.class);
@@ -177,6 +198,8 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
         recupererPossitionDestination();
         createLocationRequest();
         startLocationUpdates();
+        uiSettings = mMap.getUiSettings();
+        uiSettings.setZoomControlsEnabled(true);
     }
 
     public void recupererPossitionJoueur() {

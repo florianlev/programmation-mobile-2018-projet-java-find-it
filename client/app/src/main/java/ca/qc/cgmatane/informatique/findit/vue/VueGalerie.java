@@ -2,6 +2,7 @@ package ca.qc.cgmatane.informatique.findit.vue;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +21,6 @@ import ca.qc.cgmatane.informatique.findit.R;
 public class VueGalerie extends AppCompatActivity {
 
     protected GridView vueGridGalerie;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,6 @@ public class VueGalerie extends AppCompatActivity {
                 retourAncienneActivite();
             }
         });
-
 
 
     /*

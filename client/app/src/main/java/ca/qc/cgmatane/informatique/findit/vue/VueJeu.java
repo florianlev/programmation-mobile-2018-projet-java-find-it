@@ -4,12 +4,15 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
@@ -76,7 +79,9 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
 
     UiSettings uiSettings;
     private GestureDetectorCompat mDetector;
-
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeEventManager mShakeDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +123,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(positionJoueur));
                         mMap.animateCamera(CameraUpdateFactory.zoomTo(13f));
                         initialisation++;
-                        ouvrirDialogue();
+
                     }
                 }
 
@@ -132,7 +137,19 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
 
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
 
+        // ShakeDetector initialization
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager
+                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeEventManager();
+        mShakeDetector.setOnShakeListener(new ShakeEventManager.OnShakeListener() {
 
+            @Override
+            public void onShake(int count) {
+                Toast.makeText(VueJeu.this, "Nouvelle destination generer ", Toast.LENGTH_LONG).show();
+                recreate();
+            }
+        });
     }
 
     @Override
@@ -340,5 +357,30 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                     }
                 });
         alertDialog.show();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Add the following line to register the Session Manager Listener onResume
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer,	SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    public void onPause() {
+        // Add the following line to unregister the Sensor Manager onPause
+        mSensorManager.unregisterListener(mShakeDetector);
+        super.onPause();
+    }
+
+    public void checkFirstRun() {
+        boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("isFirstRun", true);
+        if (isFirstRun){
+            ouvrirDialogue();
+
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                    .edit()
+                    .putBoolean("isFirstRun", false)
+                    .apply();
+        }
     }
 }

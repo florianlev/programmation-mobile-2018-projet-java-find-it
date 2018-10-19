@@ -48,7 +48,7 @@ import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
 import ca.qc.cgmatane.informatique.findit.modele.Score;
 
-public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
+public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {
 
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -73,7 +73,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
 
     protected ScoreDAO scoreDAO;
 
-    int initialisation = 0;
+
 
     SharedPreferences preferences;
 
@@ -119,12 +119,6 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                         marqueurJoueur.setPosition(positionJoueur);
                     }
 
-                    if (initialisation == 0){
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(positionJoueur));
-                        mMap.animateCamera(CameraUpdateFactory.zoomTo(13f));
-                        initialisation++;
-
-                    }
                 }
 
                 if (cestGagne()){
@@ -150,6 +144,8 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                 recreate();
             }
         });
+
+
     }
 
     @Override
@@ -217,6 +213,8 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
         startLocationUpdates();
         uiSettings = mMap.getUiSettings();
         uiSettings.setZoomControlsEnabled(true);
+        mMap.setOnMapClickListener(this);
+        mMap.setOnMapLongClickListener(this);
     }
     @SuppressLint("MissingPermission")
     public void recupererPossitionJoueur() {
@@ -377,5 +375,16 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
                     .putBoolean("isFirstRun", false)
                     .apply();
         }
+    }
+
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+    }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+
+        recupererPossitionJoueur();
     }
 }

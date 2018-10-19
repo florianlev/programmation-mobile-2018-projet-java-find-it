@@ -98,7 +98,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
 
         preferences = getSharedPreferences("detail_utilisateur",MODE_PRIVATE);
         System.out.println("YOOO " + preferences.getString("pseudo",null));
-
+        checkFirstRun();
         mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
@@ -218,15 +218,10 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback {
         uiSettings = mMap.getUiSettings();
         uiSettings.setZoomControlsEnabled(true);
     }
-
+    @SuppressLint("MissingPermission")
     public void recupererPossitionJoueur() {
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(this, new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
 
         mFusedLocationClient.getLastLocation().addOnSuccessListener(
                 this, new OnSuccessListener<Location>() {

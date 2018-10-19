@@ -55,6 +55,9 @@ public class VueAfficherImage extends AppCompatActivity {
                     Log.d(DEBUG_TAG, "Right to Left swipe performed");
                     this.mDetector.onTouchEvent(event);
                     parametre_possition_photo++;
+                    if(parametre_possition_photo >= accesseurGalerie.recuperereListeScorePourImageAdapteur().length){
+                        parametre_possition_photo=0;
+                    }
                     afficherImage(parametre_possition_photo);
                     return super.onTouchEvent(event);
                 }

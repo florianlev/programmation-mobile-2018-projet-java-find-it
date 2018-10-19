@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import ca.qc.cgmatane.informatique.findit.R;
+import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
+import ca.qc.cgmatane.informatique.findit.modele.Score;
 import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
 
 public class VueCreerCompte extends AppCompatActivity {
@@ -22,7 +24,7 @@ public class VueCreerCompte extends AppCompatActivity {
     protected EditText champMdp;
     protected EditText champMdpConfirme;
     protected Utilisateur utilisateur;
-
+    protected ScoreDAO accesseurScore = ScoreDAO.getInstance();
     protected UtilisateurDAO accesseurUtilisateur = UtilisateurDAO.getInstance();
 
 
@@ -52,6 +54,8 @@ public class VueCreerCompte extends AppCompatActivity {
     private void enregistrerUtilisateur(){
         utilisateur = new Utilisateur(champPseudo.getText().toString(),champMail.getText().toString(), champMdp.getText().toString());
         accesseurUtilisateur.ajouterUtilisateurSQL(utilisateur);
+        int id = accesseurUtilisateur.recupererIdUtilisateur( utilisateur);
+        accesseurScore.ajouterScore(new Score(0,id));
 
     }
 }

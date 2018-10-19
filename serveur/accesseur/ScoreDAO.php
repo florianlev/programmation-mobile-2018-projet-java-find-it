@@ -25,5 +25,19 @@ class ScoreDAO
 
 
     }
+    function modifierScore($score)
+    {
+
+        $SQL_MODIFIER_SCORE = "UPDATE score SET score=score+'$score->valeur' WHERE utilisateur_id='$score->utilisateur_id'";
+
+        global $basededonnees;
+
+        $requeteModifierScore = $basededonnees->prepare($SQL_MODIFIER_SCORE);
+        $reussite = $requeteModifierScore->execute();
+
+        return $reussite;
+
+
+    }
 }
 ?>

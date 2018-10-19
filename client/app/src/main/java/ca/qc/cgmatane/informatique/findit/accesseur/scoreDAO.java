@@ -143,4 +143,19 @@ public class ScoreDAO {
             System.out.println("got interrupted!");
         }
     }
+
+    public void modifierScore(Score score)
+    {
+        try{
+            String url = "http://158.69.113.110/findItServeur/score/modifier/index.php?valeur="+ score.getValeur()+"&utilisateur_id="+score.getId_utilisateur();
+
+            String resultat;
+            HttpGetRequete getRequete = new HttpGetRequete();
+            resultat = getRequete.execute(url).get();
+        }catch(InterruptedException e){
+            System.out.println("got interrupted!");
+        }catch(ExecutionException e){
+            System.out.println("got interrupted!");
+        }
+    }
 }

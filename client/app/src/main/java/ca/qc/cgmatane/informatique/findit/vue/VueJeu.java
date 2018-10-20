@@ -278,6 +278,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
                         //Toast.makeText(VueJeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
                         LatLng positionDestination= getRandomLocation(possitionJoueur,1000);
+
                         if (marqueurDestination == null) {
                             MarkerOptions options = new MarkerOptions().position(positionDestination).title("Destination");
                             marqueurDestination = mMap.addMarker(options);
@@ -312,6 +313,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
     }
 
     public boolean cestGagne(){
+        System.out.println("latitude "+latitudeDestination+" longitude "+ longitudeDestination);
         if (distanceInKmBetweenEarthCoordinates(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 0.1){
             System.out.println("Gagné");
             return true;
@@ -442,6 +444,9 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
         }
         //Get nearest point to the centre
         int indexOfNearestPointToCentre = randomDistances.indexOf(Collections.min(randomDistances));
-        return randomPoints.get(indexOfNearestPointToCentre);
+        LatLng positionDestination= randomPoints.get(indexOfNearestPointToCentre);
+        this.latitudeDestination = positionDestination.latitude;
+        this.longitudeDestination = positionDestination.longitude;
+        return positionDestination;
     }
 }

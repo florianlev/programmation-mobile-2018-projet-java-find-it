@@ -1,8 +1,6 @@
 package ca.qc.cgmatane.informatique.findit.accesseur;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
+
 //import org.apache.http.client.methods.HttpPost;
 //import org.apache.http.entity.mime.HttpMultipartMode;
 //import org.apache.http.entity.mime.MultipartEntityBuilder;
@@ -10,14 +8,14 @@ import org.apache.http.client.HttpClient;
 
 //import org.apache.http.impl.client.HttpClientBuilder;
 
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import java.io.File;
 
 import java.io.IOException;
 import java.io.StringBufferInputStream;
@@ -25,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import org.apache.http.entity.mime.content.FileBody;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -125,19 +124,19 @@ public class GalerieDAO {
 
 
     public void envoyerPhoto(String cheminImage){
-        try {
+        /*try {
 
             HttpClient httpclient = HttpClientBuilder.create().build();
 
-            HttpPost httppost = new HttpPost("http://localhost/serenateserv/import.php");
+            HttpPost httppost = new HttpPost("http://158.69.113.110/findItServeur/galerie/ajouter/index.php");
+            FileBody bin = new FileBody( new File(""));
 
-
-        }
+        }*/
         System.out.println(cheminImage);
 
     }
 
-    }
+
     //todo implementer methode d'envoie d'image sur le serveur
     }
 

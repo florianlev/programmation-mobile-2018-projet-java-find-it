@@ -13,21 +13,10 @@ class GalerieDAO
 
     function ajouterPhoto($galerie)
     {
-        echo "ajouterPhoto()";
-        print_r($galerie);
-
         $SQL_AJOUTER_PHOTO = "INSERT into galerie(urlCoordonnees, utilisateur_id) VALUES('$galerie->urlCoordonnes','$galerie->utilisateur_id')";
-
-        echo $SQL_AJOUTER_PHOTO;
         global $basededonnees;
-        print_r($basededonnees);
-
         $requeteAjouterPhoto = $basededonnees->prepare($SQL_AJOUTER_PHOTO);
         $reussite = $requeteAjouterPhoto->execute();
-
-        echo "Code erreur : " . $basededonnees->errorCode();
-        echo "Erreurs : ";
-        print_r($basededonnees->errorInfo());
         return $reussite;
 
 

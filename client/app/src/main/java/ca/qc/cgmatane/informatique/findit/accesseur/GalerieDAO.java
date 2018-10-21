@@ -1,8 +1,8 @@
 package ca.qc.cgmatane.informatique.findit.accesseur;
 
-//import org.apache.http.HttpEntity;
-//import org.apache.http.HttpResponse;
-//import org.apache.http.client.HttpClient;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 //import org.apache.http.client.methods.HttpPost;
 //import org.apache.http.entity.mime.HttpMultipartMode;
 //import org.apache.http.entity.mime.MultipartEntityBuilder;
@@ -10,6 +10,8 @@ package ca.qc.cgmatane.informatique.findit.accesseur;
 
 //import org.apache.http.impl.client.HttpClientBuilder;
 
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 import org.w3c.dom.Document;
@@ -123,7 +125,17 @@ public class GalerieDAO {
 
 
     public void envoyerPhoto(String cheminImage){
+        try {
+
+            HttpClient httpclient = HttpClientBuilder.create().build();
+
+            HttpPost httppost = new HttpPost("http://localhost/serenateserv/import.php");
+
+
+        }
         System.out.println(cheminImage);
+
+    }
 
     }
     //todo implementer methode d'envoie d'image sur le serveur

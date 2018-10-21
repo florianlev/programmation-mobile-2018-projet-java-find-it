@@ -9,13 +9,15 @@
     tools:context=".vue.VueCommencer">
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:gravity="center_horizontal"
-        android:text="FIND IT" />
+    <ImageView
+        android:id="@+id/imageView_apercu"
+        android:layout_width="170dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="111dp"
+        android:layout_marginTop="0dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/action_naviguer_se_connecter"

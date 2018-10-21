@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import ca.qc.cgmatane.informatique.findit.R;
 
@@ -36,6 +39,9 @@ public class VueCommencer extends AppCompatActivity {
                 startActivityForResult(intentionNaviguerCreerCompte, ACTIVITE_CREER_COMPTE);
             }
         });
+
+        ImageView imageView = (ImageView) findViewById(R.id.imageView_apercu);
+        Picasso.get().load(R.drawable.map).into(imageView);
 
     }
 

@@ -24,10 +24,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import ca.qc.cgmatane.informatique.findit.R;
+import ca.qc.cgmatane.informatique.findit.accesseur.GalerieDAO;
 
 public class VueAlarme extends AppCompatActivity {
 
     private MediaPlayer mMediaPlayer;
+    protected GalerieDAO accesseurGalerieDAO = GalerieDAO.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,7 +110,10 @@ public class VueAlarme extends AppCompatActivity {
         );
 
         String cheminPhoto = image.getAbsolutePath();
-        //Toast.makeText(getApplicationContext(),cheminPhoto, Toast.LENGTH_SHORT).show();
+
+        //accesseurGalerieDAO.envoyerPhoto(cheminPhoto);
+        Toast.makeText(getApplicationContext(),cheminPhoto, Toast.LENGTH_SHORT).show();
+        accesseurGalerieDAO.envoyerPhoto(cheminPhoto);
         return image;
     }
 

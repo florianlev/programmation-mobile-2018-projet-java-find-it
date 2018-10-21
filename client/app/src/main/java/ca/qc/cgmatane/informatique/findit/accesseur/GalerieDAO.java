@@ -1,5 +1,17 @@
 package ca.qc.cgmatane.informatique.findit.accesseur;
 
+//import org.apache.http.HttpEntity;
+//import org.apache.http.HttpResponse;
+//import org.apache.http.client.HttpClient;
+//import org.apache.http.client.methods.HttpPost;
+//import org.apache.http.entity.mime.HttpMultipartMode;
+//import org.apache.http.entity.mime.MultipartEntityBuilder;
+//import org.apache.http.entity.mime.content.FileBody;
+
+//import org.apache.http.impl.client.HttpClientBuilder;
+
+import org.apache.http.util.EntityUtils;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -107,6 +119,12 @@ public class GalerieDAO {
     //liste de test car service worker non disponible donc recuperation a partir bdd imposible pour le moment
          String[] listeUrl =  {"https://www.debian.org/logos/openlogo-nd-100.png", "https://files.newsnetz.ch/story/1/8/5/18521241/11/topelement.jpg", "https://www.microdepot.com/wp-content/blogs.dir/92/files/2014/02/icon-27046_640.png", "https://images.frandroid.com/wp-content/uploads/2017/09/logo-apple-special-event-sept-12-2017.jpg"};
         return listeUrl;
+    }
+
+
+    public void envoyerPhoto(String cheminImage){
+        System.out.println(cheminImage);
+
     }
     //todo implementer methode d'envoie d'image sur le serveur
     }

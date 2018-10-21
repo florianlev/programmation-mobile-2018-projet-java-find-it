@@ -77,8 +77,6 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
 
     protected ScoreDAO scoreDAO;
 
-
-
     SharedPreferences preferences;
 
     UiSettings uiSettings;

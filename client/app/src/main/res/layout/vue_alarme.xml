@@ -8,6 +8,7 @@
     tools:context=".vue.VueAlarme">
 
 
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
@@ -15,12 +16,30 @@
         android:layout_marginBottom="30dp"
         android:gravity="center_horizontal"
         android:text="LIEU TROUVÉ !" />
-		
+
+    <ImageView
+        android:id="@+id/imageAEnvoyer"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dp"
+        android:layout_height="150dp"/>
+
 	<Button
-    android:id="@+id/action_prendre_photo"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Prendre une photo du lieu" />
+        android:id="@+id/action_prendre_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Prendre une photo du lieu" />
+
+    <Button
+        android:id="@+id/action_choisir_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choisir une photo" />
+
+    <Button
+        android:id="@+id/action_envoyer_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Envoyer photo" />
 
     <Button
         android:id="@+id/action_naviguer_ancienne_activite"

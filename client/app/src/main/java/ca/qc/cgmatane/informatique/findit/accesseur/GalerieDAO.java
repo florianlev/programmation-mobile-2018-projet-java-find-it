@@ -1,29 +1,28 @@
 package ca.qc.cgmatane.informatique.findit.accesseur;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.widget.Toast;
 
-//import org.apache.http.client.methods.HttpPost;
-//import org.apache.http.entity.mime.HttpMultipartMode;
-//import org.apache.http.entity.mime.MultipartEntityBuilder;
-//import org.apache.http.entity.mime.content.FileBody;
-
-//import org.apache.http.impl.client.HttpClientBuilder;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import java.io.IOException;
 import java.io.StringBufferInputStream;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
-import org.apache.http.entity.mime.content.FileBody;
+import javax.net.ssl.HttpsURLConnection;
+import android.graphics.Bitmap;
+
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -33,6 +32,11 @@ import ca.qc.cgmatane.informatique.findit.modele.ImageGalerie;
 
 public class GalerieDAO {
 
+    private static final String UPLOAD_URL = "http://158.69.113.110/findItServeur/galerie/ajouter/index.php";
+    private static final int IMAGE_REQUEST_CODE = 3;
+    private static final int STORAGE_PERMISSION_CODE = 123;
+    private Bitmap bitmap;
+    private Uri filePath;
         private static GalerieDAO instance =null;
         private BaseDeDonnees accesseurBaseDeDonnees;
         protected List<ImageGalerie> listeImage;
@@ -124,14 +128,33 @@ public class GalerieDAO {
 
 
     public void envoyerPhoto(String cheminImage){
+        //FixBitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
+
         /*try {
 
-            HttpClient httpclient = HttpClientBuilder.create().build();
+            HttpClient httpclient = new DefaultHttpClient();
 
             HttpPost httppost = new HttpPost("http://158.69.113.110/findItServeur/galerie/ajouter/index.php");
-            FileBody bin = new FileBody( new File(""));
+            FileBody bin = new FileBody( new File(cheminImage));
+            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+            builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+            builder.addPart("image", bin);
+            builder.addBinaryBody("image", new File(cheminImage));
+            HttpEntity entity = builder.build();
+            httppost.setEntity(entity);
 
-        }*/
+            System.out.println("executing request " + httppost.getRequestLine());
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity resEntity = response.getEntity();
+            if (resEntity != null) {
+                String page = EntityUtils.toString(resEntity);
+                System.out.println("PAGE :" + page);
+
+            }
+
+        } catch (IOException ex) {
+        Logger.getLogger(GalerieDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }*/
         System.out.println(cheminImage);
 
     }

@@ -3,6 +3,8 @@ package ca.qc.cgmatane.informatique.findit.vue;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
@@ -15,6 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -28,8 +31,10 @@ import ca.qc.cgmatane.informatique.findit.accesseur.GalerieDAO;
 
 public class VueAlarme extends AppCompatActivity {
 
+    private static final int RESULT_LOAD_IMAGE = 1;
     private MediaPlayer mMediaPlayer;
     protected GalerieDAO accesseurGalerieDAO = GalerieDAO.getInstance();
+    ImageView imageAEnvoyer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,15 +42,26 @@ public class VueAlarme extends AppCompatActivity {
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.vue_alarme);
-
+        imageAEnvoyer = (ImageView) findViewById(R.id.imageAEnvoyer);
         Button stopAlarm = (Button) findViewById(R.id.action_naviguer_ancienne_activite);
-        stopAlarm.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                //mMediaPlayer.stop();
-                naviguerAncienneActivite();
-                return false;
+        Button choisirPhoto = (Button) findViewById(R.id.action_choisir_photo);
+        Button envoyerPhoto = (Button) findViewById(R.id.action_envoyer_photo);
+
+        envoyerPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
+
+        choisirPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galerieIntention = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galerieIntention, RESULT_LOAD_IMAGE);
+            }
+        });
+
 
         Button prendrePhoto = (Button) findViewById(R.id.action_prendre_photo);
         prendrePhoto.setOnClickListener(new View.OnClickListener(){
@@ -58,6 +74,14 @@ public class VueAlarme extends AppCompatActivity {
             }
         });
 
+
+        stopAlarm.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                //mMediaPlayer.stop();
+                naviguerAncienneActivite();
+                return false;
+            }
+        });
         //playSound(this, getAlarmUri());
     }
 
@@ -98,6 +122,7 @@ public class VueAlarme extends AppCompatActivity {
         }
         return alert;
     }
+
     private File creerFichierImage() throws IOException {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -119,25 +144,10 @@ public class VueAlarme extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-
-            try {
-                creerFichierImage();
-                //Todo inplementer fonction d'envoie vers serveur
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }else if (resultCode == Activity.RESULT_CANCELED) {
-
-
-            Toast.makeText(getApplicationContext(), "Vous avez annuler la capture", Toast.LENGTH_SHORT).show();
-
-        } else {
-
-            Toast.makeText(getApplicationContext(),"Désolé! echec de capture photo", Toast.LENGTH_SHORT).show();
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
+            Uri selectedImage = data.getData();
+            imageAEnvoyer.setImageURI(selectedImage);
         }
     }
 }

@@ -45,20 +45,6 @@ public class VueGalerie extends AppCompatActivity {
         });
 
 
-    /*
-        java.io.FileInputStream in;
-
-        ImageView imageView = findViewById(R.id.imageView);
-        try {
-
-            File monImage = new File("sdcard/exemple.jpg");
-            in = new FileInputStream(monImage);
-
-            imageView.setImageBitmap(BitmapFactory.decodeStream(in));
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }*/
     }
 
     public void retourAncienneActivite(){

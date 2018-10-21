@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
@@ -45,8 +46,14 @@ public class VueCreerCompte extends AppCompatActivity {
         actionNaviguerJouer.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick(View arg0){
-                        enregistrerUtilisateur();
-                        startActivityForResult(intentionNaviguerJouer, ACTIVITE_JOUER);
+                        if (champMdp.getText().toString().equals(champMdpConfirme.getText().toString())) {
+                            enregistrerUtilisateur();
+                            startActivityForResult(intentionNaviguerJouer, ACTIVITE_JOUER);
+                        }
+                        else {
+                            Toast.makeText(VueCreerCompte.this,"Les mots de passe ne sont pas identique ", Toast.LENGTH_LONG).show();
+
+                        }
                     }
                 });
     }

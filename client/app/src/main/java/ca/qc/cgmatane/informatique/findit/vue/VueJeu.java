@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import ca.qc.cgmatane.informatique.findit.FindIt;
 import ca.qc.cgmatane.informatique.findit.R;
@@ -84,10 +85,11 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private ShakeEventManager mShakeDetector;
+    private long tempsDebutPartie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        tempsDebutPartie =System.currentTimeMillis();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_jeu);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -107,7 +109,6 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
                 if (locationResult == null) {
                     return;
                 }
-
                 for (Location location : locationResult.getLocations()) {
                     latitudeJoueur = location.getLatitude();
                     longitudeJoueur = location.getLongitude();
@@ -124,7 +125,8 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
                 }
 
                 if (cestGagne()){
-                    scoreDAO.modifierScore(new Score(100,preferences.getInt("id",0)));
+                    int valeurScore=genereraugmentationScore(500,50);
+                    scoreDAO.modifierScore(new Score(valeurScore,preferences.getInt("id",0)));
                     stopLocationUpdates();
                     activeAlarme();
                 }
@@ -275,7 +277,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
                         LatLng possitionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
                         //Toast.makeText(VueJeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
-                        LatLng positionDestination= getRandomLocation(possitionJoueur,1000);
+                        LatLng positionDestination= getRandomLocation(possitionJoueur,500);
 
                         if (marqueurDestination == null) {
                             MarkerOptions options = new MarkerOptions().position(positionDestination).title("Destination");
@@ -446,5 +448,21 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
         this.latitudeDestination = positionDestination.latitude;
         this.longitudeDestination = positionDestination.longitude;
         return positionDestination;
+    }
+    public int genereraugmentationScore(int valeurDepart,int valeurMin){
+        int valeurAugmentation=0;
+        System.out.println("heure de depart de la partie "+ tempsDebutPartie);
+        System.out.println(System.currentTimeMillis());
+        long intervalle=System.currentTimeMillis()-tempsDebutPartie;
+        long intervaleEnMinute=TimeUnit.MILLISECONDS.toMinutes(intervalle);
+        System.out.println("temps ecouler en minute "+ intervaleEnMinute);
+        if(intervaleEnMinute>=5){
+            int retraitAuScore=(int)intervaleEnMinute/5*50;
+            valeurAugmentation=valeurDepart-retraitAuScore;
+        }
+        if(valeurAugmentation<valeurMin){
+            valeurAugmentation=valeurMin;
+        }
+        return valeurAugmentation;
     }
 }

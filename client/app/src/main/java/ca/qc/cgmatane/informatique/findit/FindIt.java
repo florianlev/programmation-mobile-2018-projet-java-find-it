@@ -12,7 +12,10 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import ca.qc.cgmatane.informatique.findit.accesseur.BaseDeDonnees;
 //import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
@@ -108,6 +111,9 @@ public class FindIt extends AppCompatActivity {
         }
 
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+
+        ImageView imageView = (ImageView) findViewById(R.id.imageView_apercu);
+        Picasso.get().load(R.drawable.map).into(imageView);
 
     }
 

@@ -13,7 +13,8 @@ class GalerieDAO
 
     function ajouterPhoto($galerie)
     {
-        $SQL_AJOUTER_PHOTO = "INSERT into galerie(urlCoordonnees, utilisateur_id) VALUES('$galerie->urlCoordonnes','$galerie->utilisateur_id')";
+        $SQL_AJOUTER_PHOTO = "INSERT into galerie(url) VALUES('$galerie->url')";
+        echo ($SQL_AJOUTER_PHOTO);
         global $basededonnees;
         $requeteAjouterPhoto = $basededonnees->prepare($SQL_AJOUTER_PHOTO);
         $reussite = $requeteAjouterPhoto->execute();

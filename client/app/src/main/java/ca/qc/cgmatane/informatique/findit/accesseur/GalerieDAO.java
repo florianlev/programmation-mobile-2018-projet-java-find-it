@@ -121,37 +121,6 @@ public class GalerieDAO {
     }
 
 
-    public void envoyerPhoto(String cheminImage){
-        //FixBitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
-
-        /*try {
-
-            HttpClient httpclient = new DefaultHttpClient();
-
-            HttpPost httppost = new HttpPost("http://158.69.113.110/findItServeur/galerie/ajouter/index.php");
-            FileBody bin = new FileBody( new File(cheminImage));
-            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-            builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-            builder.addPart("image", bin);
-            builder.addBinaryBody("image", new File(cheminImage));
-            HttpEntity entity = builder.build();
-            httppost.setEntity(entity);
-
-            System.out.println("executing request " + httppost.getRequestLine());
-            HttpResponse response = httpclient.execute(httppost);
-            HttpEntity resEntity = response.getEntity();
-            if (resEntity != null) {
-                String page = EntityUtils.toString(resEntity);
-                System.out.println("PAGE :" + page);
-
-            }
-
-        } catch (IOException ex) {
-        Logger.getLogger(GalerieDAO.class.getName()).log(Level.SEVERE, null, ex);
-    }*/
-        System.out.println(cheminImage);
-
-    }
 
 
     //todo implementer methode d'envoie d'image sur le serveur

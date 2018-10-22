@@ -2,23 +2,23 @@ package ca.qc.cgmatane.informatique.findit.modele;
 
 public class ImageGalerie {
     private int id_image;
-    private String urlCoordonnees;
-    private int   utilisateur_id;
+    private String url;
 
-    public ImageGalerie(int id_image, String urlCoordonnees, int utilisateur_id) {
+
+    public ImageGalerie(int id_image, String url, int utilisateur_id) {
         super();
         this.id_image = id_image;
-        this.urlCoordonnees = urlCoordonnees;
-        this.utilisateur_id = utilisateur_id;
+        this.url = url;
+
     }
 
     public ImageGalerie() {
         super();
     }
 
-    public ImageGalerie(String urlCoordonnees, int utilisateur_id) {
-        this.urlCoordonnees = urlCoordonnees;
-        this.utilisateur_id = utilisateur_id;
+    public ImageGalerie(String url, int utilisateur_id) {
+        this.url = url;
+
     }
 
     public int getId_image() {
@@ -29,19 +29,12 @@ public class ImageGalerie {
         this.id_image = id_image;
     }
 
-    public String getUrlCoordonnees() {
-        return urlCoordonnees;
+    public String getUrl() {
+        return url;
     }
 
-    public void setUrlCoordonnees(String urlCoordonnees) {
-        this.urlCoordonnees = urlCoordonnees;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public int getUtilisateur_id() {
-        return utilisateur_id;
-    }
-
-    public void setUtilisateur_id(int utilisateur_id) {
-        this.utilisateur_id = utilisateur_id;
-    }
 }

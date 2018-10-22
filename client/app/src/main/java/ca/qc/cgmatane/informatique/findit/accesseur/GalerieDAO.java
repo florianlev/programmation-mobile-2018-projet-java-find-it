@@ -2,15 +2,11 @@ package ca.qc.cgmatane.informatique.findit.accesseur;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.widget.Toast;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 
 import java.io.IOException;
 import java.io.StringBufferInputStream;
@@ -18,10 +14,7 @@ import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
-import javax.net.ssl.HttpsURLConnection;
-import android.graphics.Bitmap;
 
 
 import javax.xml.parsers.DocumentBuilder;
@@ -71,20 +64,18 @@ public class GalerieDAO {
 
                 Document document = parseur.parse(new StringBufferInputStream(xml));
                 String racine = document.getDocumentElement().getNodeName();
-                NodeList listeNoeudScore = document.getElementsByTagName("score");
+                NodeList listeNoeudScore = document.getElementsByTagName("photo");
                 listeImage.clear();
                 for (int position = 0; position < listeNoeudScore.getLength(); position++) {
                     Element noeudScore = (Element) listeNoeudScore.item(position);
                     ImageGalerie imageGalerie = new ImageGalerie();
                     String id = noeudScore.getElementsByTagName("id").item(0).getTextContent();
                     imageGalerie.setId_image(Integer.parseInt(id));
-                    String valeur = noeudScore.getElementsByTagName("urlCoordonnees").item(0).getTextContent();
-                    imageGalerie.setUrlCoordonnees(valeur);
-
-                    String id_utilisateur = noeudScore.getElementsByTagName("utilisateur_id").item(0).getTextContent();
-                    imageGalerie.setUtilisateur_id(Integer.parseInt(id_utilisateur));
+                    String valeur = noeudScore.getElementsByTagName("url").item(0).getTextContent();
+                    imageGalerie.setUrl(valeur);
 
                     listeImage.add(imageGalerie);
+
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -116,13 +107,16 @@ public class GalerieDAO {
         }
 
     public String[] recuperereListeScorePourImageAdapteur() {
-/*
-        listerImage();
-        Object[] objNames = listerImage().toArray();
+        List<String> listeImageAfficher =new ArrayList<>();
+        for(ImageGalerie image : listerImage()){
+            listeImageAfficher.add(image.getUrl());
+        }
 
-        String[] listeUrl = Arrays.copyOf(objNames, objNames.length, String[].class);*/
+        Object[] objNames = listeImageAfficher.toArray();
+
+        String[] listeUrl = Arrays.copyOf(objNames, objNames.length, String[].class);
     //liste de test car service worker non disponible donc recuperation a partir bdd imposible pour le moment
-         String[] listeUrl =  {"https://www.debian.org/logos/openlogo-nd-100.png", "https://files.newsnetz.ch/story/1/8/5/18521241/11/topelement.jpg", "https://www.microdepot.com/wp-content/blogs.dir/92/files/2014/02/icon-27046_640.png", "https://images.frandroid.com/wp-content/uploads/2017/09/logo-apple-special-event-sept-12-2017.jpg"};
+        // String[] listeUrl =  {"https://www.debian.org/logos/openlogo-nd-100.png", "https://files.newsnetz.ch/story/1/8/5/18521241/11/topelement.jpg", "https://www.microdepot.com/wp-content/blogs.dir/92/files/2014/02/icon-27046_640.png", "https://images.frandroid.com/wp-content/uploads/2017/09/logo-apple-special-event-sept-12-2017.jpg"};
         return listeUrl;
     }
 

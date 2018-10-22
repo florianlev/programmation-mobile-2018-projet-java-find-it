@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
+import com.squareup.picasso.Picasso;
+
 import org.apache.http.HttpConnection;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -70,12 +72,11 @@ public class VueAlarme extends AppCompatActivity {
         envoyerPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Click");
-                int time = (int) (System.currentTimeMillis());
-                Timestamp tsTemp = new Timestamp(time);
+                String nomfichier = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
                 Bitmap image = ((BitmapDrawable) imageAEnvoyer.getDrawable()).getBitmap();
 
-                new TransfererImage(image,tsTemp.toString()).execute();
+
+                new TransfererImage(image,nomfichier).execute();
                 naviguerAncienneActivite();
 
             }
@@ -150,24 +151,7 @@ public class VueAlarme extends AppCompatActivity {
         return alert;
     }
 
-    private File creerFichierImage() throws IOException {
 
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String nomImage = "JPEG_" + timeStamp + "_";
-        File dossierDestination = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                nomImage,
-                ".jpg",
-                dossierDestination
-        );
-        Bitmap bm;
-        bm = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(image.getAbsolutePath()), 100,100, true);
-        /*Uri uri = Uri.fromFile(image);
-        System.out.println(uri);*/
-
-        imageAEnvoyer.setIma;
-        return image;
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -178,13 +162,13 @@ public class VueAlarme extends AppCompatActivity {
             imageAEnvoyer.setImageURI(selectedImage);
         }
         else if (requestCode == APPAREIL_PHOTO & resultCode == RESULT_OK){
-            System.out.println("APPAREIL PHOTO");
-            try{
-                creerFichierImage();
 
-            }catch(IOException e){
-                e.printStackTrace();
-            }
+            System.out.println("APPAREIL PHOTO");
+
+
+                Bitmap bit= (Bitmap) data.getExtras().get("data");
+                imageAEnvoyer.setImageBitmap(bit);
+
         }
     }
 

@@ -165,7 +165,7 @@ public class VueAlarme extends AppCompatActivity {
         /*Uri uri = Uri.fromFile(image);
         System.out.println(uri);*/
 
-        imageAEnvoyer.setIma;
+        //imageAEnvoyer.setIma;
         return image;
     }
 

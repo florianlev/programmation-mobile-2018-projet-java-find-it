@@ -116,48 +116,17 @@ public class GalerieDAO {
         }
 
     public String[] recuperereListeScorePourImageAdapteur() {
-/*
+
         listerImage();
         Object[] objNames = listerImage().toArray();
 
-        String[] listeUrl = Arrays.copyOf(objNames, objNames.length, String[].class);*/
+        String[] listeUrl = Arrays.copyOf(objNames, objNames.length, String[].class);
     //liste de test car service worker non disponible donc recuperation a partir bdd imposible pour le moment
-         String[] listeUrl =  {"https://www.debian.org/logos/openlogo-nd-100.png", "https://files.newsnetz.ch/story/1/8/5/18521241/11/topelement.jpg", "https://www.microdepot.com/wp-content/blogs.dir/92/files/2014/02/icon-27046_640.png", "https://images.frandroid.com/wp-content/uploads/2017/09/logo-apple-special-event-sept-12-2017.jpg"};
+         //String[] listeUrl =  {"https://www.debian.org/logos/openlogo-nd-100.png", "https://files.newsnetz.ch/story/1/8/5/18521241/11/topelement.jpg", "https://www.microdepot.com/wp-content/blogs.dir/92/files/2014/02/icon-27046_640.png", "https://images.frandroid.com/wp-content/uploads/2017/09/logo-apple-special-event-sept-12-2017.jpg"};
         return listeUrl;
     }
 
 
-    public void envoyerPhoto(String cheminImage){
-        //FixBitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
-
-        /*try {
-
-            HttpClient httpclient = new DefaultHttpClient();
-
-            HttpPost httppost = new HttpPost("http://158.69.113.110/findItServeur/galerie/ajouter/index.php");
-            FileBody bin = new FileBody( new File(cheminImage));
-            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-            builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-            builder.addPart("image", bin);
-            builder.addBinaryBody("image", new File(cheminImage));
-            HttpEntity entity = builder.build();
-            httppost.setEntity(entity);
-
-            System.out.println("executing request " + httppost.getRequestLine());
-            HttpResponse response = httpclient.execute(httppost);
-            HttpEntity resEntity = response.getEntity();
-            if (resEntity != null) {
-                String page = EntityUtils.toString(resEntity);
-                System.out.println("PAGE :" + page);
-
-            }
-
-        } catch (IOException ex) {
-        Logger.getLogger(GalerieDAO.class.getName()).log(Level.SEVERE, null, ex);
-    }*/
-        System.out.println(cheminImage);
-
-    }
 
 
     //todo implementer methode d'envoie d'image sur le serveur

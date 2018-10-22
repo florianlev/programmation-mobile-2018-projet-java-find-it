@@ -1,15 +1,22 @@
 <?php
+    include "../../accesseur/GalerieDAO.php";
+    $galerieDAO = new GalerieDAO();
+    //print_r($galerieDAO);
+    $photo = new stdClass();
 
-    if (isset($_FILE['image'])){
-        $nomDeBase = $_FILES['image']['name'];     //Le nom original du fichier, comme sur le disque du visiteur (exemple : mon_icone.png).
-        
-        $nom = "image/".$nomDeBase;
-        $resultat = move_uploaded_file($_FILES['Image']['tmp_name'],$nom);
-    }
-    
-    else{
-            echo "pas d'image reçue";
-    }
+   
+
+    $nom = $_POST['nom'];
+    $image = $_POST['image'];
+
+    $adresse = "http://158.69.113.110/findItServeur/galerie/ajouter/images/".$nom.".jpg";
+    echo ($adresse);
+    $photo->url = $adresse;
+
+    $listePhotos = $galerieDAO->ajouterPhoto($photo);
+
+    $decodedImage = base64_decode("$image");
+    file_put_contents("images/" . $nom. ".JPG", $decodedImage);
 
 ?>
 

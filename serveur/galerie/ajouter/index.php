@@ -16,7 +16,7 @@
     $listePhotos = $galerieDAO->ajouterPhoto($photo);
 
     $decodedImage = base64_decode("$image");
-    file_put_contents("images/" . $nom. ".JPG", $decodedImage);
+    file_put_contents("images/" . $nom. ".jpg", $decodedImage);
 
 ?>
 

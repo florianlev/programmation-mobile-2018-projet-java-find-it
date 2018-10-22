@@ -16,8 +16,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
     {
         ?>
         <photo>
-            <id><?=($galerie->id_photo)?></id>
-            <urlCoordonnees><?=($galerie->urlCoordonnees)?></urlCoordonnees>
+            <id><?=($galerie->galerie_id)?></id>
+            <url><?=($galerie->url)?></url>
             <utilisateur_id><?=$galerie->utilisateur_id?></utilisateur_id>
         </photo>
         <?php

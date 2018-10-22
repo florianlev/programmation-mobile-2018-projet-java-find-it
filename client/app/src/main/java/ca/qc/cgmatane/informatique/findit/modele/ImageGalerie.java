@@ -18,7 +18,6 @@ public class ImageGalerie {
 
     public ImageGalerie(String url, int utilisateur_id) {
         this.url = url;
-
     }
 
     public int getId_image() {

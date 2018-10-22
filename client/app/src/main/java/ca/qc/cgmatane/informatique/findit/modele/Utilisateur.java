@@ -15,8 +15,8 @@ public class Utilisateur {
 
     public Utilisateur() {
         super();
-
     }
+
     public Utilisateur(String pseudo, String mail, String mdp) {
         super();
         this.pseudo = pseudo;
@@ -27,6 +27,7 @@ public class Utilisateur {
             e.printStackTrace();
         }
     }
+
     public Utilisateur(String pseudo, String mdp) {
         super();
         this.pseudo = pseudo;

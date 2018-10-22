@@ -5,6 +5,7 @@ import java.util.HashMap;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
 
 public class Score {
+
     protected int id_score;
     protected int valeur;
     protected int id_utilisateur;
@@ -18,6 +19,7 @@ public class Score {
         this.valeur = valeur;
         this.id_utilisateur = id_utilisateur;
     }
+
     public Score(int id_score, int valeur, int id_utilisateur) {
         super();
         this.id_score = id_score;
@@ -50,8 +52,7 @@ public class Score {
         this.valeur = valeur;
     }
 
-    public HashMap<String, String> obtenirScorePourAdapteur()
-    {
+    public HashMap<String, String> obtenirScorePourAdapteur() {
         UtilisateurDAO utilisateurDAO= UtilisateurDAO.getInstance();
         Utilisateur utilisateur = utilisateurDAO.trouverUtilisateur(this.id_utilisateur);
         String speudo =utilisateur.getPseudo();

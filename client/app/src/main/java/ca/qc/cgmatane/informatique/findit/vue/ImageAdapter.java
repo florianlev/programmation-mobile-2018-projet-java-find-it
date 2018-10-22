@@ -8,9 +8,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.GalerieDAO;
-import ca.qc.cgmatane.informatique.findit.modele.ImageGalerie;
 
 public class ImageAdapter extends BaseAdapter {
     private GalerieDAO accesseurGalerie= GalerieDAO.getInstance();
@@ -52,5 +50,5 @@ public class ImageAdapter extends BaseAdapter {
 
     //liste contenant nos url
 
-    private String[] listeUrl= accesseurGalerie.recuperereListeScorePourImageAdapteur();
+    private String[] listeUrl= accesseurGalerie.recuperereListePourImageAdapteur();
 }

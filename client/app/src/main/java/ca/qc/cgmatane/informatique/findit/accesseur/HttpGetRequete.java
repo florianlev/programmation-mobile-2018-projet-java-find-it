@@ -22,10 +22,10 @@ public class HttpGetRequete extends AsyncTask<String, Void, String> {
         String inputLine;
 
         try{
-            //Creation de l'objet URL
+            //Création de l'objet URL
             URL monUrl = new URL(stringUrl);
 
-            //Creation de la connection
+            //Création de la connection
             HttpURLConnection connection = (HttpURLConnection) monUrl.openConnection();
 
 

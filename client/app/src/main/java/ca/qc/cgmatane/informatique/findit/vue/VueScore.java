@@ -43,7 +43,7 @@ public class VueScore extends AppCompatActivity {
     }
 
     protected void afficherTousLesEvenement(){
-        listeScorePourAdapteur = accesseurScore.recuperereListeScorePourAdapteur();
+        listeScorePourAdapteur = accesseurScore.recupererListePourAdapteur();
         SimpleAdapter adapteur = new SimpleAdapter(this, listeScorePourAdapteur,
                 android.R.layout.two_line_list_item,
                 new String[] {"valeur","joueur"},

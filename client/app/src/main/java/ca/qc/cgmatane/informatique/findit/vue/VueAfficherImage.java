@@ -55,7 +55,7 @@ public class VueAfficherImage extends AppCompatActivity {
                     Log.d(DEBUG_TAG, "Right to Left swipe performed");
                     this.mDetector.onTouchEvent(event);
                     parametre_possition_photo++;
-                    if (parametre_possition_photo >= accesseurGalerie.recuperereListeScorePourImageAdapteur().length){
+                    if (parametre_possition_photo >= accesseurGalerie.recuperereListePourImageAdapteur().length){
                         parametre_possition_photo = 0;
                     }
                     afficherImage(parametre_possition_photo);
@@ -70,7 +70,7 @@ public class VueAfficherImage extends AppCompatActivity {
 
         /*
         this.mDetector.onTouchEvent(event);
-        Log.d(DEBUG_TAG, "" + accesseurGalerie.recuperereListeScorePourImageAdapteur().length + "  param position : " + parametre_possition_photo);
+        Log.d(DEBUG_TAG, "" + accesseurGalerie.recuperereListePourImageAdapteur().length + "  param position : " + parametre_possition_photo);
         parametre_possition_photo++;
         afficherImage(parametre_possition_photo);
         compteur++;
@@ -80,7 +80,7 @@ public class VueAfficherImage extends AppCompatActivity {
 
     public void afficherImage(int position){
         Log.d(DEBUG_TAG, "======DEBUT=======");
-        String urlImage = accesseurGalerie.recuperereListeScorePourImageAdapteur()[position];
+        String urlImage = accesseurGalerie.recuperereListePourImageAdapteur()[position];
         Log.d(DEBUG_TAG, "  variable classe position : " + parametre_possition_photo);
         Log.d(DEBUG_TAG, "parametre fonction : " + position);
         ImageView imageView = (ImageView) findViewById(R.id.imageView_apercu);

@@ -29,7 +29,7 @@ public class HttpPostRequete extends AsyncTask<String, Void, String>{
         try {
             URL monUrl = new URL(stringUrl);
 
-            //Creation de la connection
+            //Création de la connection
             HttpURLConnection connection = (HttpURLConnection) monUrl.openConnection();
 
             connection.setDoInput(true);

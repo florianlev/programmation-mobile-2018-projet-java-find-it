@@ -4,44 +4,33 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
 import java.io.IOException;
-
 import java.io.StringBufferInputStream;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
 import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
 
 public class UtilisateurDAO {
-
 
     private static UtilisateurDAO instance = null;
     private BaseDeDonnees accesseurBaseDeDonnees;
 
     List<Utilisateur> listeUtilisateurs;
 
-
     public static UtilisateurDAO getInstance() {
-
         if (null == instance) {
             instance = new UtilisateurDAO();
         }
-
         return instance;
     }
 
     public UtilisateurDAO() {
-
         this.accesseurBaseDeDonnees = BaseDeDonnees.getInstance();
         listeUtilisateurs = new ArrayList<>();
-
     }
 
 

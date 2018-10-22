@@ -26,7 +26,7 @@ import ca.qc.cgmatane.informatique.findit.modele.Score;
 
 public class ScoreDAO {
 
-    private static ScoreDAO instance =null;
+    private static ScoreDAO instance = null;
     private BaseDeDonnees accesseurBaseDeDonnees;
     protected List<Score> listeScores;
 
@@ -37,17 +37,13 @@ public class ScoreDAO {
         return instance;
     }
 
-
     public ScoreDAO(){
         this.accesseurBaseDeDonnees = BaseDeDonnees.getInstance();
         listeScores = new ArrayList<>();
-
     }
 
 
-
     public List<Score> listerScore() {
-
         try {
             String url = "http://158.69.113.110/findItServeur/score/liste/indexScore.php";
             String xml;
@@ -95,30 +91,24 @@ public class ScoreDAO {
     }
 
 
-    public Score trouverScore(int id_score)
-    {
-        for(Score scoreRecherche : this.listeScores)
-        {
+    public Score trouverScore(int id_score) {
+        for(Score scoreRecherche : this.listeScores) {
             if(scoreRecherche.getId_score() == id_score) return scoreRecherche;
         }
         return null;
     }
 
 
-    public void modifierEvenement(Score Score)
-    {
-
+    public void modifierEvenement(Score Score) {
         SQLiteDatabase db = accesseurBaseDeDonnees.getWritableDatabase();
         ContentValues value = new ContentValues();
         value.put("valeur", Score.getValeur());
 
-
         db.update("Score",value,"score_id = ? ",new String[] {String.valueOf(Score.getId_score())});
-
     }
 
 
-    public List<HashMap<String, String>> recuperereListeScorePourAdapteur() {
+    public List<HashMap<String, String>> recupererListePourAdapteur() {
         List<HashMap<String, String>> listeScorePourAdapteur;
         listeScorePourAdapteur = new ArrayList<HashMap<String, String>>();
 
@@ -129,8 +119,7 @@ public class ScoreDAO {
         return listeScorePourAdapteur;
     }
 
-    public void ajouterScore(Score score)
-    {
+    public void ajouterScore(Score score) {
         try{
             String url = "http://158.69.113.110/findItServeur/score/ajouter/index.php?valeur="+ score.getValeur()+"&utilisateur_id="+score.getId_utilisateur();
 
@@ -144,8 +133,7 @@ public class ScoreDAO {
         }
     }
 
-    public void modifierScore(Score score)
-    {
+    public void modifierScore(Score score) {
         try{
             String url = "http://158.69.113.110/findItServeur/score/modifier/index.php?valeur="+ score.getValeur()+"&utilisateur_id="+score.getId_utilisateur();
 

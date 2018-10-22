@@ -1,29 +1,21 @@
 package ca.qc.cgmatane.informatique.findit.vue;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.location.Location;
-import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.Toast;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -40,31 +32,19 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
 import ca.qc.cgmatane.informatique.findit.FindIt;
 import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
 import ca.qc.cgmatane.informatique.findit.modele.Score;
 
-public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {
-
-    private GoogleMap mMap;
-    private FusedLocationProviderClient mFusedLocationClient;
-    private LocationCallback mLocationCallback;
-    private Marker marqueurJoueur = null;
-    LocationRequest mLocationRequest = new LocationRequest();
-    private Marker marqueurDestination = null;
-
-    protected double latitudeJoueur, longitudeJoueur;
-    protected double latitudeDestination, longitudeDestination;
-
+public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
+                                                            GoogleMap.OnMapClickListener,
+                                                            GoogleMap.OnMapLongClickListener {
 
     static final public int ACTIVITE_SCORE = 1;
     static final public int ACTIVITE_GALERIE = 2;
@@ -75,6 +55,17 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
     protected Intent intentionNaviguerGalerie;
     protected Intent intentionNaviguerAlarme;
     protected Intent intentionNaviguerCommencer;
+
+    private GoogleMap mMap;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private LocationCallback mLocationCallback;
+    LocationRequest mLocationRequest = new LocationRequest();
+
+    private Marker marqueurJoueur = null;
+    private Marker marqueurDestination = null;
+
+    protected double latitudeJoueur, longitudeJoueur;
+    protected double latitudeDestination, longitudeDestination;
 
     protected ScoreDAO scoreDAO;
 
@@ -89,10 +80,11 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        tempsDebutPartie =System.currentTimeMillis();
+
+        tempsDebutPartie = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_jeu);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -101,8 +93,9 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
         scoreDAO = scoreDAO.getInstance();
 
         preferences = getSharedPreferences("detail_utilisateur",MODE_PRIVATE);
-        System.out.println("YOOO " + preferences.getString("pseudo",null));
-        checkFirstRun();
+
+        verifierPremiereUtilisation();
+
         mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
@@ -113,7 +106,6 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
                     latitudeJoueur = location.getLatitude();
                     longitudeJoueur = location.getLongitude();
                     LatLng positionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
-                    //Toast.makeText(VueJeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
 
                     if (marqueurJoueur == null) {
                         MarkerOptions options = new MarkerOptions().position(positionJoueur).title("Position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
@@ -121,7 +113,6 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
                     } else {
                         marqueurJoueur.setPosition(positionJoueur);
                     }
-
                 }
 
                 if (cestGagne()){
@@ -382,7 +373,7 @@ public class VueJeu extends AppCompatActivity implements OnMapReadyCallback , Go
         super.onPause();
     }
 
-    public void checkFirstRun() {
+    public void verifierPremiereUtilisation() {
         boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("isFirstRun", true);
         if (isFirstRun){
             ouvrirDialogue();

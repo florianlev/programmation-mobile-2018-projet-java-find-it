@@ -5,8 +5,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 public class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-    private static final String DEBUG_TAG = "Gestures";
 
+    private static final String DEBUG_TAG = "Gestures";
 
     @Override
     public boolean onFling(MotionEvent event1, MotionEvent event2,

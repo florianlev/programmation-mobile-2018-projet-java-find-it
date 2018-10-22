@@ -20,7 +20,7 @@ import ca.qc.cgmatane.informatique.findit.R;
 
 public class VueGalerie extends AppCompatActivity {
 
-    protected GridView vueGridGalerie;
+    protected GridView vueGrilleGalerie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,8 @@ public class VueGalerie extends AppCompatActivity {
 
             }
         });
-        Button actionNaviguerretour = (Button) findViewById(R.id.action_naviguer_retour_jeu);
-        actionNaviguerretour.setOnClickListener(new View.OnClickListener(){
+        Button actionNaviguerRetour = (Button) findViewById(R.id.action_naviguer_retour_jeu);
+        actionNaviguerRetour.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){
                 retourAncienneActivite();
             }
@@ -50,6 +50,4 @@ public class VueGalerie extends AppCompatActivity {
     public void retourAncienneActivite(){
         this.finish();
     }
-
-    //https://stackoverflow.com/questions/2688169/how-to-load-an-imageview-from-a-png-file
 }

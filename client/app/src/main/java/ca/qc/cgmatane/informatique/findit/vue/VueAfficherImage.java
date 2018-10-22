@@ -18,7 +18,7 @@ public class VueAfficherImage extends AppCompatActivity {
 
     private GestureDetectorCompat mDetector;
 
-    int parametre_possition_photo;
+    int parametre_position_photo;
 
     private static final String DEBUG_TAG = "Taille tableau";
 
@@ -31,10 +31,10 @@ public class VueAfficherImage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_afficher_image);
         Bundle parametres = this.getIntent().getExtras();
-        parametre_possition_photo = (int) parametres.get("position");
+        parametre_position_photo = (int) parametres.get("position");
 
         accesseurGalerie= GalerieDAO.getInstance();
-        afficherImage(parametre_possition_photo);
+        afficherImage(parametre_position_photo);
 
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
     }
@@ -49,43 +49,27 @@ public class VueAfficherImage extends AppCompatActivity {
                 float finalX = event.getX();
                 float finalY = event.getY();
 
-                Log.d(DEBUG_TAG, "Action was UP");
-
+                // swipe de droite à gauche
                 if (initialX < finalX) {
-                    Log.d(DEBUG_TAG, "Right to Left swipe performed");
                     this.mDetector.onTouchEvent(event);
-                    parametre_possition_photo++;
-                    if (parametre_possition_photo >= accesseurGalerie.recuperereListePourImageAdapteur().length){
-                        parametre_possition_photo = 0;
+                    parametre_position_photo++;
+
+                    if (parametre_position_photo >= accesseurGalerie.recuperereListePourImageAdapteur().length){
+                        parametre_position_photo = 0;
                     }
-                    afficherImage(parametre_possition_photo);
+                    afficherImage(parametre_position_photo);
                     return super.onTouchEvent(event);
                 }
 
                 break;
         }
         return super.onTouchEvent(event);
-
     }
-
-        /*
-        this.mDetector.onTouchEvent(event);
-        Log.d(DEBUG_TAG, "" + accesseurGalerie.recuperereListePourImageAdapteur().length + "  param position : " + parametre_possition_photo);
-        parametre_possition_photo++;
-        afficherImage(parametre_possition_photo);
-        compteur++;
-        if (compteur % 3 == 0) parametre_possition_photo -= 3;
-        return super.onTouchEvent(event);*/
 
 
     public void afficherImage(int position){
-        Log.d(DEBUG_TAG, "======DEBUT=======");
         String urlImage = accesseurGalerie.recuperereListePourImageAdapteur()[position];
-        Log.d(DEBUG_TAG, "  variable classe position : " + parametre_possition_photo);
-        Log.d(DEBUG_TAG, "parametre fonction : " + position);
         ImageView imageView = (ImageView) findViewById(R.id.imageView_apercu);
         Picasso.get().load(urlImage).into(imageView);
-        Log.d(DEBUG_TAG, "======FIN=======");
-
     }
 }

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
@@ -63,6 +62,5 @@ public class VueCreerCompte extends AppCompatActivity {
         accesseurUtilisateur.ajouterUtilisateurSQL(utilisateur);
         int id = accesseurUtilisateur.recupererIdUtilisateur( utilisateur);
         accesseurScore.ajouterScore(new Score(0,id));
-
     }
 }

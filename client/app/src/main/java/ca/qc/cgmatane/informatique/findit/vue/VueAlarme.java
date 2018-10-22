@@ -1,17 +1,14 @@
 package ca.qc.cgmatane.informatique.findit.vue;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,11 +19,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-
-import com.squareup.picasso.Picasso;
-
-import org.apache.http.HttpConnection;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -36,23 +28,17 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.GalerieDAO;
-import ca.qc.cgmatane.informatique.findit.accesseur.HttpPostRequete;
 
 public class VueAlarme extends AppCompatActivity {
 
-    private static final int RESULT_LOAD_IMAGE = 1;
+    private static final int RESULTAT_CHARGER_IMAGE = 1;
     private static final int APPAREIL_PHOTO = 2;
     private MediaPlayer mMediaPlayer;
     protected GalerieDAO accesseurGalerieDAO = GalerieDAO.getInstance();
@@ -75,7 +61,6 @@ public class VueAlarme extends AppCompatActivity {
                 String nomfichier = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
                 Bitmap image = ((BitmapDrawable) imageAEnvoyer.getDrawable()).getBitmap();
 
-
                 new TransfererImage(image,nomfichier).execute();
                 naviguerAncienneActivite();
 
@@ -86,7 +71,7 @@ public class VueAlarme extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent galerieIntention = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galerieIntention, RESULT_LOAD_IMAGE);
+                startActivityForResult(galerieIntention, RESULTAT_CHARGER_IMAGE);
             }
         });
 
@@ -98,7 +83,6 @@ public class VueAlarme extends AppCompatActivity {
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takePictureIntent, APPAREIL_PHOTO);
                 }
-
             }
         });
 
@@ -135,8 +119,7 @@ public class VueAlarme extends AppCompatActivity {
         }
     }
 
-    //Get an alarm sound. Try for an alarm. If none set, try notification,
-    //Otherwise, ringtone.
+    //Recupere une sonnerie d'alarme
     private Uri getAlarmUri() {
         Uri alert = RingtoneManager
                 .getDefaultUri(RingtoneManager.TYPE_ALARM);
@@ -152,23 +135,17 @@ public class VueAlarme extends AppCompatActivity {
     }
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
 
+        if (requestCode == RESULTAT_CHARGER_IMAGE && resultCode == RESULT_OK && data != null){
             Uri selectedImage = data.getData();
             imageAEnvoyer.setImageURI(selectedImage);
         }
         else if (requestCode == APPAREIL_PHOTO & resultCode == RESULT_OK){
-
-            System.out.println("APPAREIL PHOTO");
-
-
-                Bitmap bit= (Bitmap) data.getExtras().get("data");
-                imageAEnvoyer.setImageBitmap(bit);
-
+            Bitmap bit= (Bitmap) data.getExtras().get("data");
+            imageAEnvoyer.setImageBitmap(bit);
         }
     }
 
@@ -184,6 +161,7 @@ public class VueAlarme extends AppCompatActivity {
         Bitmap image;
         String nom;
         String URLServer = "http://158.69.113.110/findItServeur/galerie/ajouter/index.php";
+
         public TransfererImage(Bitmap image, String nom){
             this.image = image;
             this.nom = nom;
@@ -218,8 +196,5 @@ public class VueAlarme extends AppCompatActivity {
             super.onPostExecute(aVoid);
             Toast.makeText(getApplicationContext(), "Image telecharger", Toast.LENGTH_SHORT).show();
         }
-
-
-
     }
 }

@@ -194,7 +194,7 @@ public class VueAlarme extends AppCompatActivity {
 
         protected void onPostExecute(Void aVoid){
             super.onPostExecute(aVoid);
-            Toast.makeText(getApplicationContext(), "Image telecharger", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Image telechargée", Toast.LENGTH_SHORT).show();
         }
     }
 }

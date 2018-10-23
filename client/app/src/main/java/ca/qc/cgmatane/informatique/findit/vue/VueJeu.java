@@ -108,7 +108,7 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
                     LatLng positionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
 
                     if (marqueurJoueur == null) {
-                        MarkerOptions options = new MarkerOptions().position(positionJoueur).title("Position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                        MarkerOptions options = new MarkerOptions().position(positionJoueur).title("Votre position").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                         marqueurJoueur = mMap.addMarker(options);
                     } else {
                         marqueurJoueur.setPosition(positionJoueur);
@@ -211,7 +211,7 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
                         LatLng positionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
 
                         if (marqueurJoueur == null) {
-                            MarkerOptions options = new MarkerOptions().position(positionJoueur).title("Position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                            MarkerOptions options = new MarkerOptions().position(positionJoueur).title("Votre position").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                             marqueurJoueur = mMap.addMarker(options);
                         } else {
                             marqueurJoueur.setPosition(positionJoueur);

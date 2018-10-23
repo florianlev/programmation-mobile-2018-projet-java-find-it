@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import ca.qc.cgmatane.informatique.findit.R;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
 import ca.qc.cgmatane.informatique.findit.modele.Utilisateur;
@@ -39,7 +38,9 @@ public class VueSeConnecter extends AppCompatActivity {
 
         champPseudo = (EditText) findViewById(R.id.vue_se_connecter_champ_pseudo);
         champMdp = (EditText) findViewById(R.id.vue_se_connecter_champ_mot_de_passe);
+
         intentionNaviguerJouer = new Intent(this, VueJeu.class);
+
         Button actionNaviguerJouer = (Button) findViewById(R.id.action_se_connecter_pour_jouer);
         checkBoxConnecter = (CheckBox) findViewById(R.id.checkbox_se_connecter);
 

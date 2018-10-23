@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,13 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import ca.qc.cgmatane.informatique.findit.accesseur.BaseDeDonnees;
-//import ca.qc.cgmatane.informatique.findit.accesseur.ScoreDAO;
 import ca.qc.cgmatane.informatique.findit.accesseur.UtilisateurDAO;
-import ca.qc.cgmatane.informatique.findit.modele.Score;
 import ca.qc.cgmatane.informatique.findit.vue.MyGestureListener;
 import ca.qc.cgmatane.informatique.findit.vue.VueCommencer;
 import ca.qc.cgmatane.informatique.findit.vue.VueJeu;
@@ -32,13 +27,11 @@ public class FindIt extends AppCompatActivity {
     static final public int ACTIVITE_SCORE = 2;
     static final public int ACTIVITE_JEU = 3;
 
-
     protected Intent intentionNaviguerCommencer;
     protected Intent intentionNaviguerVueJeu;
 
     protected Intent intentionNaviguerScore;
     protected UtilisateurDAO utilisateurDAO;
-    //protected ScoreDAO scoreDAO;
 
     SharedPreferences preferences;
 
@@ -53,13 +46,8 @@ public class FindIt extends AppCompatActivity {
 
         setContentView(R.layout.vue_accueil);
 
-
         BaseDeDonnees.getInstance(getApplicationContext());
         utilisateurDAO = utilisateurDAO.getInstance();
-
-        //scoreDAO = scoreDAO.getInstance();
-
-        //utilisateurDAO.listerUtilisateur();
 
         preferences = getSharedPreferences("detail_utilisateur",MODE_PRIVATE);
 
@@ -67,16 +55,13 @@ public class FindIt extends AppCompatActivity {
         intentionNaviguerScore = new Intent(this, VueScore.class);
         intentionNaviguerVueJeu = new Intent(this, VueJeu.class);
         Button actionNaviguerCommencer = (Button) findViewById(R.id.action_naviguer_commencer);
-        TextView textUtilisateur = (TextView) findViewById(R.id.textView_utilisateur_vue_accueil);
+        TextView texteUtilisateur = (TextView) findViewById(R.id.textView_utilisateur_vue_accueil);
 
-        if(preferences.getBoolean("estConnecter",false)){
-            textUtilisateur.setText("Welcome : " + preferences.getString("pseudo", null));
+        if (preferences.getBoolean("estConnecter",false)){
+            texteUtilisateur.setText("Bienvenue " + preferences.getString("pseudo", null));
 
-            //TEST AJOUTER SCORE DANS BDD
-            //Score score = new Score(4000550, preferences.getInt("id",0));
-            //scoreDAO.ajouterScore(score);
-        }else{
-            //Vidage des session si l'utilisateur n'a pas cocher rester connecter
+        } else{
+            //Vidage des sessions si l'utilisateur n'a pas coché rester connecté
             SharedPreferences.Editor editeur = preferences.edit();
             editeur.clear();
             editeur.commit();
@@ -114,7 +99,6 @@ public class FindIt extends AppCompatActivity {
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView_apercu);
         Picasso.get().load(R.drawable.map).into(imageView);
-
     }
 
 

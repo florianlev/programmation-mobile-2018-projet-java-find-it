@@ -116,8 +116,8 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
                 }
 
                 if (cestGagne()){
-                    int valeurScore=genereraugmentationScore(500,50);
-                    scoreDAO.modifierScore(new Score(valeurScore,preferences.getInt("id",0)));
+                    int valeurScore= genererAugmentationScore(500,50);
+                    scoreDAO.modifierScore(new Score(valeurScore, preferences.getInt("id",0)));
                     stopLocationUpdates();
                     activeAlarme();
                 }
@@ -126,21 +126,18 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
 
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
 
-        // ShakeDetector initialization
+        // Initialisation ShakeDetector
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mAccelerometer = mSensorManager
-                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mShakeDetector = new ShakeEventManager();
         mShakeDetector.setOnShakeListener(new ShakeEventManager.OnShakeListener() {
 
             @Override
             public void onShake(int count) {
-                Toast.makeText(VueJeu.this, "Nouvelle destination generer ", Toast.LENGTH_LONG).show();
+                Toast.makeText(VueJeu.this, "Nouvelle destination générée ", Toast.LENGTH_LONG).show();
                 recreate();
             }
         });
-
-
     }
 
     @Override
@@ -148,9 +145,6 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
         this.mDetector.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
-
-
-
 
 
     public void activeAlarme(){
@@ -190,20 +184,11 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
     }
 
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        recupererPossitionJoueur();
-        recupererPossitionDestination();
+        recupererPositionJoueur();
+        recupererPositionDestination();
         createLocationRequest();
         startLocationUpdates();
         uiSettings = mMap.getUiSettings();
@@ -211,10 +196,10 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
         mMap.setOnMapClickListener(this);
         mMap.setOnMapLongClickListener(this);
     }
+
+
     @SuppressLint("MissingPermission")
-    public void recupererPossitionJoueur() {
-
-
+    public void recupererPositionJoueur() {
 
         mFusedLocationClient.getLastLocation().addOnSuccessListener(
                 this, new OnSuccessListener<Location>() {
@@ -223,18 +208,16 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
 
                         double latitudeJoueur = location.getLatitude();
                         double longitudeJoueur = location.getLongitude();
-                        LatLng possitionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
-                        //Toast.makeText(VueJeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
+                        LatLng positionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
 
                         if (marqueurJoueur == null) {
-                            MarkerOptions options = new MarkerOptions().position(possitionJoueur).title("Position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                            MarkerOptions options = new MarkerOptions().position(positionJoueur).title("Position joueur").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                             marqueurJoueur = mMap.addMarker(options);
                         } else {
-                            marqueurJoueur.setPosition(possitionJoueur);
+                            marqueurJoueur.setPosition(positionJoueur);
                         }
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(possitionJoueur));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(positionJoueur));
                         mMap.animateCamera(CameraUpdateFactory.zoomTo(13f));
-
                     }
                 });
     }
@@ -256,7 +239,7 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
     }
     
     @SuppressLint("MissingPermission")
-    public void recupererPossitionDestination() {
+    public void recupererPositionDestination() {
 
         mFusedLocationClient.getLastLocation().addOnSuccessListener(
                 this, new OnSuccessListener<Location>() {
@@ -265,10 +248,8 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
 
                         double latitudeJoueur = location.getLatitude();
                         double longitudeJoueur = location.getLongitude();
-                        LatLng possitionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
-                        //Toast.makeText(VueJeu.this, "latitude" + latitudeJoueur + " longitude" + longitudeJoueur, Toast.LENGTH_LONG).show();
-
-                        LatLng positionDestination= getRandomLocation(possitionJoueur,500);
+                        LatLng positionJoueur = new LatLng(latitudeJoueur, longitudeJoueur);
+                        LatLng positionDestination= getRandomLocation(positionJoueur,500);
 
                         if (marqueurDestination == null) {
                             MarkerOptions options = new MarkerOptions().position(positionDestination).title("Destination");
@@ -281,61 +262,35 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
 
                     }
                 });
-
     }
 
-    public double degreesToRadians(double degrees) {
-        return degrees * Math.PI / 180;
+    public double degresEnRadians(double degres) {
+        return degres * Math.PI / 180;
     }
 
-    public double distanceInKmBetweenEarthCoordinates(double lat1, double lon1, double lat2, double lon2) {
-        int earthRadiusKm = 6371;
+    public double distanceEnKmEntreCoordonnees(double lat1, double lon1, double lat2, double lon2) {
+        int rayonTerreKm = 6371;
 
-        double dLat = degreesToRadians(lat2-lat1);
-        double dLon = degreesToRadians(lon2-lon1);
+        double dLat = degresEnRadians(lat2-lat1);
+        double dLon = degresEnRadians(lon2-lon1);
 
-        lat1 = degreesToRadians(lat1);
-        lat2 = degreesToRadians(lat2);
+        lat1 = degresEnRadians(lat1);
+        lat2 = degresEnRadians(lat2);
 
         double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
                 Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        return earthRadiusKm * c;
+        return rayonTerreKm * c;
     }
 
+
     public boolean cestGagne(){
-        System.out.println("latitude "+latitudeDestination+" longitude "+ longitudeDestination);
-        if (distanceInKmBetweenEarthCoordinates(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 0.1){
-            System.out.println("Gagné");
+        if (distanceEnKmEntreCoordonnees(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 0.1){
             return true;
         }else{
-            System.out.println("Marche encore");
             return false;
         }
     }
-
-    /*public double genererLatitudeNouvelleDestination(){
-        double latitudeDestinationMax = 48.850020;
-        double latitudeDestinationMin = 48.830022;
-
-        double latitudeNouvelleDestination = latitudeDestinationMin + (Math.random() * ((latitudeDestinationMax - latitudeDestinationMin)));
-        latitudeDestination = latitudeNouvelleDestination;
-        System.out.println("Nouvelle destination " + latitudeNouvelleDestination);
-
-        return latitudeNouvelleDestination;
-    }
-
-    public double genererLongitudeNouvelleDestination(){
-        double longitudeDestinationMax = -67.535786;
-        double longitudeDestinationMin = -67.491784;
-
-        double longitudeNouvelleDestination = longitudeDestinationMin + (Math.random() * ((longitudeDestinationMax - longitudeDestinationMin)));
-        longitudeDestination = longitudeNouvelleDestination;
-        System.out.println("Nouvelle destination " + longitudeNouvelleDestination);
-
-        return longitudeNouvelleDestination;
-    }*/
-
 
 
     protected void onActivityResult(int activite, int resultat, Intent donnees){
@@ -359,16 +314,16 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
                 });
         alertDialog.show();
     }
+
+
     @Override
     public void onResume() {
         super.onResume();
-        // Add the following line to register the Session Manager Listener onResume
         mSensorManager.registerListener(mShakeDetector, mAccelerometer,	SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
     public void onPause() {
-        // Add the following line to unregister the Sensor Manager onPause
         mSensorManager.unregisterListener(mShakeDetector);
         super.onPause();
     }
@@ -390,70 +345,72 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
     public void onMapClick(LatLng latLng) {
     }
 
+
     @Override
     public void onMapLongClick(LatLng latLng) {
-
-        recupererPossitionJoueur();
+        recupererPositionJoueur();
     }
 
-    public LatLng getRandomLocation(LatLng point, int radius) {
 
-        List<LatLng> randomPoints = new ArrayList<>();
-        List<Float> randomDistances = new ArrayList<>();
-        Location myLocation = new Location("");
-        myLocation.setLatitude(point.latitude);
-        myLocation.setLongitude(point.longitude);
+    public LatLng getRandomLocation(LatLng point, int rayon) {
 
-        //This is to generate 10 random points
+        List<LatLng> pointsAleatoires = new ArrayList<>();
+        List<Float> distancesAleatoires = new ArrayList<>();
+        Location maLocalisation = new Location("");
+        maLocalisation.setLatitude(point.latitude);
+        maLocalisation.setLongitude(point.longitude);
+
+        // Génère 10 points aléatoires
         for(int i = 0; i<10; i++) {
             double x0 = point.latitude;
             double y0 = point.longitude;
 
             Random random = new Random();
 
-            // Convert radius from meters to degrees
-            double radiusInDegrees = radius / 111000f;
-
+            // Convertit le rayon des mètres en degres
+            double rayonEnDegres = rayon / 111000f;
             double u = random.nextDouble();
             double v = random.nextDouble();
-            double w = radiusInDegrees * Math.sqrt(u);
+            double w = rayonEnDegres * Math.sqrt(u);
             double t = 2 * Math.PI * v;
             double x = w * Math.cos(t);
             double y = w * Math.sin(t);
 
-            // Adjust the x-coordinate for the shrinking of the east-west distances
             double new_x = x / Math.cos(y0);
 
             double foundLatitude = new_x + x0;
             double foundLongitude = y + y0;
             LatLng randomLatLng = new LatLng(foundLatitude, foundLongitude);
-            randomPoints.add(randomLatLng);
+            pointsAleatoires.add(randomLatLng);
             Location l1 = new Location("");
             l1.setLatitude(randomLatLng.latitude);
             l1.setLongitude(randomLatLng.longitude);
-            randomDistances.add(l1.distanceTo(myLocation));
+            distancesAleatoires.add(l1.distanceTo(maLocalisation));
         }
-        //Get nearest point to the centre
-        int indexOfNearestPointToCentre = randomDistances.indexOf(Collections.min(randomDistances));
-        LatLng positionDestination= randomPoints.get(indexOfNearestPointToCentre);
+
+        // Sélectionne le point le plus proche du centre
+        int indexOfNearestPointToCentre = distancesAleatoires.indexOf(Collections.min(distancesAleatoires));
+        LatLng positionDestination= pointsAleatoires.get(indexOfNearestPointToCentre);
         this.latitudeDestination = positionDestination.latitude;
         this.longitudeDestination = positionDestination.longitude;
+
         return positionDestination;
     }
-    public int genereraugmentationScore(int valeurDepart,int valeurMin){
-        int valeurAugmentation=0;
-        System.out.println("heure de depart de la partie "+ tempsDebutPartie);
-        System.out.println(System.currentTimeMillis());
-        long intervalle=System.currentTimeMillis()-tempsDebutPartie;
-        long intervaleEnMinute=TimeUnit.MILLISECONDS.toMinutes(intervalle);
-        System.out.println("temps ecouler en minute "+ intervaleEnMinute);
-        if(intervaleEnMinute>=5){
-            int retraitAuScore=(int)intervaleEnMinute/5*50;
-            valeurAugmentation=valeurDepart-retraitAuScore;
+
+
+    public int genererAugmentationScore(int valeurDepart, int valeurMin){
+        int valeurAugmentation = 0;
+        long intervalle = System.currentTimeMillis() - tempsDebutPartie;
+        long intervaleEnMinute = TimeUnit.MILLISECONDS.toMinutes(intervalle);
+
+        if(intervaleEnMinute >= 5){
+            int retraitAuScore = (int) intervaleEnMinute / 5 * 50;
+            valeurAugmentation = valeurDepart - retraitAuScore;
         }
-        if(valeurAugmentation<valeurMin){
-            valeurAugmentation=valeurMin;
+        if(valeurAugmentation < valeurMin){
+            valeurAugmentation = valeurMin;
         }
+
         return valeurAugmentation;
     }
 }

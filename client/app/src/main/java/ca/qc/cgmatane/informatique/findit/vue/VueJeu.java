@@ -285,7 +285,7 @@ public class VueJeu extends AppCompatActivity implements    OnMapReadyCallback ,
 
 
     public boolean cestGagne(){
-        if (distanceEnKmEntreCoordonnees(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 0.1){
+        if (distanceEnKmEntreCoordonnees(latitudeDestination, longitudeDestination, latitudeJoueur, longitudeJoueur) <= 1){
             return true;
         }else{
             return false;
